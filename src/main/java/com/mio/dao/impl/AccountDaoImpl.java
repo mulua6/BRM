@@ -19,7 +19,6 @@ public class AccountDaoImpl  implements AccountDao{
     }
 
     public AccountDaoImpl(SessionFactory sessionFactory) {
-        System.out.println("con session fac");
         this.sessionFactory = sessionFactory;
     }
 
@@ -27,24 +26,8 @@ public class AccountDaoImpl  implements AccountDao{
 
     public void save(Account account){
 
-//        String pathStr = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
-
-//        sessionFactory = new Configuration()
-//                .configure(hibernate/hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
-//                .buildSessionFactory();
-
-
-
-//        getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(Flu‌​shMode.AUTO);
-//        Session currentSession = this.getHibernateTemplate().getSessionFactory().
-
-//        currentSession.setFlushMode(FlushMode.AUTO);
-//        ThreadLocal<BeanFactory> beanFactoryAwareThreadLocal = new ThreadLocal<BeanFactory>();
-//        BeanFactory beanFactory = beanFactoryAwareThreadLocal.get();
-//        beanFactory.getBean("sessionFactory");
         Session currentSession = sessionFactory.getCurrentSession();
-
-        currentSession.save(account);
+//        currentSession.save(account);
 
     }
 
@@ -53,7 +36,6 @@ public class AccountDaoImpl  implements AccountDao{
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
-        System.out.println("set session factory");
         this.sessionFactory = sessionFactory;
     }
 }

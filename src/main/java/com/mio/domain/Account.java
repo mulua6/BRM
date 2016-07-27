@@ -1,6 +1,10 @@
 package com.mio.domain;
 
-public class Account {
+import javax.rmi.CORBA.Util;
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
+
+public class Account implements Delayed {
     private int id;
     private String email;
     private String username;
@@ -87,5 +91,13 @@ public class Account {
                 ", phone='" + phone + '\'' +
                 ", email2='" + email2 + '\'' +
                 '}';
+    }
+
+    public long getDelay(TimeUnit unit) {
+        return unit.convert(60,TimeUnit.SECONDS);
+    }
+
+    public int compareTo(Delayed o) {
+        return 1;
     }
 }

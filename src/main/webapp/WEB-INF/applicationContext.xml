@@ -16,12 +16,6 @@
           
 	<import resource="spring/applicationContext-db.xml"/>
 	<import resource="spring/applicationContext-account.xml"/>
-	<!--<import resource="spring/applicationContext-department.xml"/> -->
-	<!--<import resource="spring/applicationContext-user.xml"/> -->
-	<!--<import resource="spring/applicationContext-role.xml"/> -->
-	<!--<import resource="spring/applicationContext-privilege.xml"/> -->
-	<!--<import resource="spring/applicationContext-login.xml"/> -->
-	<!--<import resource="spring/applicationContext-web.xml"/> -->
     <!-- 自动加载构建bean -->
     <context:component-scan base-package="com.mio" />
 
