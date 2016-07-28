@@ -1,6 +1,7 @@
 package com.mio.testDemo;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;

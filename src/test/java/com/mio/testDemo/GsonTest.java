@@ -52,7 +52,7 @@ public class GsonTest {
 
 
         String sub = sessionSetupLog.substring(sessionSetupLog.indexOf("SessionSetupTime="));
-    System.out.println(sub);
+        System.out.println(sub);
         sub = sub.substring(0,sub.indexOf(","));
 
         System.out.println(sub);

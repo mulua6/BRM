@@ -1,6 +1,7 @@
 package com.mio.testDemo;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 /**
  * Created by hel2 on 11/7/2016.
