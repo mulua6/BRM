@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="true">
+    
+	<!-- For the standard levels, we have ALL < TRACE < DEBUG < INFO < WARN < ERROR < FATAL < OFF. -->
+
+
+    <!--日志文件最大的大小-->
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <MaxFileSize>10MB</MaxFileSize>
+    </triggeringPolicy>
+
+
+    <!--
+         Console Appender outputs anything sent to it to System Out
+     -->
+     
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+	   <encoder>
+	       <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	   </encoder>
+	</appender>
+
+    <!--
+       The detailed the appender outputs anything sent to it to log file for detailed content.
+     -->
+   
+    <appender name="detailed"  class="ch.qos.logback.core.FileAppender">
+        <file>target/detailed.log</file>
+
+
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--&lt;!&ndash;日志文件输出的文件名&ndash;&gt;-->
+            <!--<FileNamePattern>${LOG_HOME}/TestWeb.log.%d{yyyy-MM-dd}.log</FileNamePattern>-->
+            <!--&lt;!&ndash;日志文件保留天数&ndash;&gt;-->
+            <!--<MaxHistory>30</MaxHistory>-->
+        <!--</rollingPolicy>-->
+
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--日志的数输出级别   默认级别-->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="detailed"/>
+    </root>
+
+    <!-- additivity=false ensures data only goes to the detailed log -->
+    
+    <logger name="com.mio.testDemo.TestLogback" level="WARN" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="detailed"/>
+    </logger>
+
+
+
+    <!--日志异步到数据库 -->
+    <!--<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">-->
+        <!--&lt;!&ndash;日志异步到数据库 &ndash;&gt;-->
+        <!--<connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">-->
+            <!--&lt;!&ndash;连接池 &ndash;&gt;-->
+            <!--<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+                <!--<driverClass>com.mysql.jdbc.Driver</driverClass>-->
+                <!--<url>jdbc:mysql://127.0.0.1:3306/databaseName</url>-->
+                <!--<user>root</user>-->
+                <!--<password>root</password>-->
+            <!--</dataSource>-->
+        <!--</connectionSource>-->
+    <!--</appender>-->
+
+
+
+</configuration>
+
