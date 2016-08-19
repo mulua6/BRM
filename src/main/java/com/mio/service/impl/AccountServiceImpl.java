@@ -6,6 +6,8 @@ import com.mio.service.AccountService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by liuhe on 15/12/20.
  * update
@@ -16,6 +18,11 @@ public class AccountServiceImpl implements AccountService {
 
     public void save(Account account){
         accountDao.save(account);
+    }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        return accountDao.getAllAccounts();
     }
 
     public AccountDao getAccountDao() {

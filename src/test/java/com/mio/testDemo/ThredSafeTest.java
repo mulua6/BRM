@@ -16,7 +16,7 @@ public class ThredSafeTest implements Runnable {
     private int counter = 0;
 
 
-    @Test(threadPoolSize = 3,invocationCount = 3)
+//    @Test(threadPoolSize = 3,invocationCount = 3)
     public synchronized void testThredSafe(){
 
         System.out.println(Thread.currentThread().getId());
@@ -26,8 +26,15 @@ public class ThredSafeTest implements Runnable {
     }
 
     public void run() {
-        testThredSafe();
-        System.out.println(this.counter);
+//        testThredSafe();
+        System.out.println(Thread.currentThread().getId());
+        try {
+            System.out.println("begin sleep");
+            Thread.sleep(2000);
+            System.out.println("end sleep");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -38,8 +45,29 @@ public class ThredSafeTest implements Runnable {
         executorService.submit(new ThredSafeTest());
         executorService.submit(new ThredSafeTest());
         executorService.submit(new ThredSafeTest());
-//        executorService.
     }
 
 
-}
+    public static void main(String[] args) throws Exception {
+
+        ThredSafeTest t1 = new ThredSafeTest();
+
+//        ExecutorService es = Executors.newCachedThreadPool();
+//
+//        es.execute(t1);
+
+
+        Thread thread = new Thread(t1);
+
+        thread.start();
+        thread.join(3000);
+
+        System.out.println(Thread.currentThread().getId());
+
+
+
+    }
+
+
+
+    }

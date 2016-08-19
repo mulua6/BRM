@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"    
+    xsi:schemaLocation="
+          http://www.springframework.org/schema/beans    
+          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="accountDao" class="com.mio.dao.impl.AccountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+    <!--<bean id="accountDao" class="com.mio.dao.impl.AccountDaoImpl">-->
+        <!--<constructor-arg ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+	
+	<bean id="accountService" class="com.mio.service.impl.AccountServiceImpl">
+		<property name="accountDao" ref="accountDao"/>
+	</bean>
+	
+	<bean id="accountAction" class="com.mio.action.AccountAction" >
+		<property name="accountService" ref="accountService"/>
+	</bean>
+	
+</beans> 

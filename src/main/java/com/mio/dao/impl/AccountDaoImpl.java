@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by liuhe on 15/12/20.
  * update
@@ -29,6 +31,11 @@ public class AccountDaoImpl  implements AccountDao{
         Session currentSession = sessionFactory.getCurrentSession();
 //        currentSession.save(account);
 
+    }
+
+    @Override
+    public List<Account> getAllAccounts() {
+        return null;
     }
 
     public SessionFactory getSessionFactory() {
