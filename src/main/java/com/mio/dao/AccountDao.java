@@ -14,5 +14,6 @@ public interface AccountDao {
 
     void save(Account account);
 
+
     List<Account> getAllAccounts();
 }
