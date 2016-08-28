@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class AccountDaoImpl  implements AccountDao{
 
-    @Autowired
+//    @Autowired
     private SessionFactory sessionFactory;
 
     public AccountDaoImpl() {

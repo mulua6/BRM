@@ -16,7 +16,7 @@ import java.util.Scanner;
  * update
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/donotuse")
 public class AccountAction  {
 
     @Autowired

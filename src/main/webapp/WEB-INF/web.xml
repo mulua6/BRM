@@ -5,7 +5,7 @@
 <web-app>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext*.xml</param-value><!-- 通配符，有时候需要在根目录中写多个applicationContextXXX文件 -->
+        <param-value>classpath*:/applicationContext.xml</param-value><!-- 通配符，有时候需要在根目录中写多个applicationContextXXX文件 -->
     </context-param>
 
     <!-- 字符集过滤器 -->

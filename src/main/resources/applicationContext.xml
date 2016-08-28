@@ -16,10 +16,11 @@
           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
           
 	<!--<import resource="spring/applicationContext-db.xml"/>-->
-	<import resource="spring/spring-dbcp-db.xml"/>
-	<import resource="spring/applicationContext-account.xml"/>
+	<!--<import resource="spring/applicationContext-account.xml"/>-->
+	<import resource="/spring/spring-dbcp-db.xml"/>
+	<import resource="spring/mybatis-account.xml"/>
     <!-- 自动加载构建bean -->
-    <context:component-scan base-package="com.mio" />
+    <!--<context:component-scan base-package="com.mio" />-->
 
 	<!--<mybatis:scan base-package="com.mio.dao" />-->
 

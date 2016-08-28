@@ -6,7 +6,7 @@
           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
           ">
     <account:bean id="jdbc" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
-        <account:property name="locations" value="/WEB-INF/jdbc.properties"/>
+        <account:property name="locations" value="classpath*:jdbc.properties"/>
     </account:bean>
 
     <account:bean id = "dataSource" class = "org.apache.commons.dbcp.BasicDataSource">
@@ -25,7 +25,7 @@
         <!-- 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请 -->
         <account:property name="minIdle" value="10" />
         <!--#给出一条简单的sql语句进行验证-->
-        <account:property name="validationQuery" value="select getdate()" />
+        <!--<account:property name="validationQuery" value="select getdate()" />-->
         <!--#在取出连接时进行有效验证-->
         <account:property name="removeAbandonedTimeout" value="120" />
         <account:property name="removeAbandoned" value="true" />
@@ -35,10 +35,10 @@
         <account:property name="minEvictableIdleTimeMillis" value="3600000" />
     </account:bean>
 
-    //SqlSessionFactory配置，注意此处有大坑（如果你使用Intellij这个ide的话请看后面的填坑指南）
+    <!--//SqlSessionFactory配置，注意此处有大坑（如果你使用Intellij这个ide的话请看后面的填坑指南）-->
     <account:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <account:property name="dataSource" ref="dataSource"/>
-        <account:property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--<account:property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
     </account:bean>
 
 </account:beans>

@@ -15,4 +15,6 @@ import java.util.List;
 public interface AccountService {
     void save(Account account);
     List<Account> getAllAccounts();
+
+    Account findAccount(String id);
 }

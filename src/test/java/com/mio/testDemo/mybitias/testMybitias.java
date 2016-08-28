@@ -1,5 +1,6 @@
 package com.mio.testDemo.mybitias;
 
+import com.mio.dao.AccountMapper;
 import com.mio.domain.Account;
 import com.mio.service.AccountService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,11 +22,16 @@ public class testMybitias {
     public void testmybitas1(){
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        AccountService as = (AccountService)context.getBean("AccountService");
+        AccountMapper as = (AccountMapper)context.getBean("accountMapper");
 
 
-        List<Account> allAccounts = as.getAllAccounts();
-        System.out.println(allAccounts.size());
+    Account account = as.getAccount("1333");
+    System.out.println(account.getPhone());
+
+
+    System.out.println(testMybitias.class.getClassLoader().getResource(""));
+
+//    this.getClass().getResource("")
 
     }
 }

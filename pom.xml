@@ -129,6 +129,11 @@
           <scope>test</scope>
       </dependency>
 
+      <dependency>
+          <groupId>com.alibaba</groupId>
+          <artifactId>druid</artifactId>
+          <version>1.0.24</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>demo</finalName>
