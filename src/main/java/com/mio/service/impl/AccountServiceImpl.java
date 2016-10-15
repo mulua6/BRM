@@ -30,6 +30,11 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
+    @Override
+    public int count() {
+        return 0;
+    }
+
     public AccountDao getAccountDao() {
         return accountDao;
     }

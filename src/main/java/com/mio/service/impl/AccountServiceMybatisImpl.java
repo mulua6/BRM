@@ -1,6 +1,5 @@
 package com.mio.service.impl;
 
-import com.mio.dao.AccountDao;
 import com.mio.dao.AccountMapper;
 import com.mio.domain.Account;
 import com.mio.service.AccountService;
@@ -29,6 +28,11 @@ public class AccountServiceMybatisImpl implements AccountService {
     @Override
     public Account findAccount(String id){
         return accountMapper.getAccount(id);
+    }
+
+    @Override
+    public int count() {
+        return accountMapper.count1();
     }
 
     public AccountMapper getAccountMapper() {

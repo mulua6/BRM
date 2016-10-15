@@ -17,4 +17,6 @@ public interface AccountService {
     List<Account> getAllAccounts();
 
     Account findAccount(String id);
+
+    int count();
 }

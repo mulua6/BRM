@@ -3,7 +3,9 @@ package com.mio.testDemo;
 import com.mio.domain.Account;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.concurrent.DelayQueue;
 
 /**
@@ -35,7 +37,27 @@ public class Demo1Test {
     }
 
 
+    @Test
+    public void testName() throws Exception {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Iterator<Integer> iterator = list.iterator();
+        while (iterator.hasNext()){
+            Integer next = iterator.next();
+
+            iterator.remove();
+//            list.remove(next);
+
+
+        }
 
 
 
+    }
 }

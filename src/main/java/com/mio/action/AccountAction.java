@@ -19,54 +19,63 @@ import java.util.Scanner;
 @RequestMapping("/donotuse")
 public class AccountAction  {
 
-    @Autowired
-    private AccountService accountService;
+//    @Autowired
+//    private AccountService accountService;
 
     @RequestMapping("book")
     public String index(){
 
-        String pathStr = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
-
-        Path path = Paths.get(pathStr,"mimi.txt");
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(path.toAbsolutePath(),"utf-8");
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        Account account = new Account();
-//        while (scanner.hasNext()){
-            for (int i = 0; i <10 ; i++) {
-
-            String line = scanner.nextLine();
-            String[] accounts = line.split("----");
-            System.out.println(accounts[0]);
-
-            account.setEmail(accounts[0]);
-            account.setUsername(accounts[1]);
-            account.setRealName(accounts[2]);
-            account.setCardId(accounts[3]);
-            account.setPassword(accounts[4]);
-            account.setPhone(accounts[5]);
-            account.setEmail2(accounts[6]);
-
-            accountService.save(account);
-        }
+//        String pathStr = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
+//
+//        Path path = Paths.get(pathStr,"mimi.txt");
+//        Scanner scanner = null;
+//        try {
+//            scanner = new Scanner(path.toAbsolutePath(),"utf-8");
+//        } catch (IOException e) {
+//
+//            e.printStackTrace();
+//        }
+//
+//        Account account = new Account();
+////        while (scanner.hasNext()){
+//            for (int i = 0; i <10 ; i++) {
+//
+//            String line = scanner.nextLine();
+//            String[] accounts = line.split("----");
+//            System.out.println(accounts[0]);
+//
+//            account.setEmail(accounts[0]);
+//            account.setUsername(accounts[1]);
+//            account.setRealName(accounts[2]);
+//            account.setCardId(accounts[3]);
+//            account.setPassword(accounts[4]);
+//            account.setPhone(accounts[5]);
+//            account.setEmail2(accounts[6]);
+//
+//            accountService.save(account);
+//        }
 
 
         return "index";
     }
 
-
-    public AccountService getAccountService() {
-        return accountService;
-
-    }
-
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
+//
+//    public AccountService getAccountService() {
+//        return accountService;
+//
+//    }
+//
+//    public void setAccountService(AccountService accountService) {
+//        this.accountService = accountService;
+//    }
+//
+//    @RequestMapping("count")
+//    public void count(){
+//
+//        int count = accountService.count();
+//
+//        System.out.println(count);
+//
+//
+//    }
 }

@@ -1,11 +1,12 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd"
+         version="2.4">
 
-<web-app>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:/applicationContext.xml</param-value><!-- 通配符，有时候需要在根目录中写多个applicationContextXXX文件 -->
+        <param-value>WEB-INF/applicationContext.xml</param-value><!-- 通配符，有时候需要在根目录中写多个applicationContextXXX文件 -->
     </context-param>
 
     <!-- 字符集过滤器 -->
@@ -42,11 +43,15 @@
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!-- servlet初始化实例化默认是在第一次请求的时候加载，在这里配置能在web容器启动的时候完成 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>WEB-INF/springmvc-servlet.xml</param-value>
+        </init-param>
         <load-on-startup>10</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.action</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mio.mapper.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.mio.domain.Book" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="isbn" property="isbn" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="revision" property="revision" jdbcType="VARCHAR" />
+    <result column="packaging" property="packaging" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="wcount" property="wcount" jdbcType="INTEGER" />
+    <result column="paper" property="paper" jdbcType="VARCHAR" />
+    <result column="pcount" property="pcount" jdbcType="INTEGER" />
+    <result column="suite_number" property="suiteNumber" jdbcType="INTEGER" />
+    <result column="attachment" property="attachment" jdbcType="VARCHAR" />
+    <result column="attachment_number" property="attachmentNumber" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="shelf_id" property="shelfId" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, book_name, number, status, other, isbn, code, author, publisher, revision, packaging, 
+    size, wcount, paper, pcount, suite_number, attachment, attachment_number, room_id, 
+    shelf_id, location
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mio.domain.BookExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mio.domain.BookExample" >
+    delete from book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mio.domain.Book" >
+    insert into book (id, book_name, number, 
+      status, other, isbn, 
+      code, author, publisher, 
+      revision, packaging, size, 
+      wcount, paper, pcount, 
+      suite_number, attachment, attachment_number, 
+      room_id, shelf_id, location
+      )
+    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, 
+      #{revision,jdbcType=VARCHAR}, #{packaging,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
+      #{wcount,jdbcType=INTEGER}, #{paper,jdbcType=VARCHAR}, #{pcount,jdbcType=INTEGER}, 
+      #{suiteNumber,jdbcType=INTEGER}, #{attachment,jdbcType=VARCHAR}, #{attachmentNumber,jdbcType=INTEGER}, 
+      #{roomId,jdbcType=INTEGER}, #{shelfId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mio.domain.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="isbn != null" >
+        isbn,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="revision != null" >
+        revision,
+      </if>
+      <if test="packaging != null" >
+        packaging,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="wcount != null" >
+        wcount,
+      </if>
+      <if test="paper != null" >
+        paper,
+      </if>
+      <if test="pcount != null" >
+        pcount,
+      </if>
+      <if test="suiteNumber != null" >
+        suite_number,
+      </if>
+      <if test="attachment != null" >
+        attachment,
+      </if>
+      <if test="attachmentNumber != null" >
+        attachment_number,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="shelfId != null" >
+        shelf_id,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null" >
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null" >
+        #{revision,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="wcount != null" >
+        #{wcount,jdbcType=INTEGER},
+      </if>
+      <if test="paper != null" >
+        #{paper,jdbcType=VARCHAR},
+      </if>
+      <if test="pcount != null" >
+        #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="suiteNumber != null" >
+        #{suiteNumber,jdbcType=INTEGER},
+      </if>
+      <if test="attachment != null" >
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentNumber != null" >
+        #{attachmentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="shelfId != null" >
+        #{shelfId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mio.domain.BookExample" resultType="java.lang.Integer" >
+    select count(*) from book
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update book
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookName != null" >
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.other != null" >
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbn != null" >
+        isbn = #{record.isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publisher != null" >
+        publisher = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.revision != null" >
+        revision = #{record.revision,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packaging != null" >
+        packaging = #{record.packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wcount != null" >
+        wcount = #{record.wcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.paper != null" >
+        paper = #{record.paper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcount != null" >
+        pcount = #{record.pcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.suiteNumber != null" >
+        suite_number = #{record.suiteNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.attachment != null" >
+        attachment = #{record.attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentNumber != null" >
+        attachment_number = #{record.attachmentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomId != null" >
+        room_id = #{record.roomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shelfId != null" >
+        shelf_id = #{record.shelfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.location != null" >
+        location = #{record.location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update book
+    set id = #{record.id,jdbcType=INTEGER},
+      book_name = #{record.bookName,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      other = #{record.other,jdbcType=VARCHAR},
+      isbn = #{record.isbn,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      publisher = #{record.publisher,jdbcType=VARCHAR},
+      revision = #{record.revision,jdbcType=VARCHAR},
+      packaging = #{record.packaging,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      wcount = #{record.wcount,jdbcType=INTEGER},
+      paper = #{record.paper,jdbcType=VARCHAR},
+      pcount = #{record.pcount,jdbcType=INTEGER},
+      suite_number = #{record.suiteNumber,jdbcType=INTEGER},
+      attachment = #{record.attachment,jdbcType=VARCHAR},
+      attachment_number = #{record.attachmentNumber,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      shelf_id = #{record.shelfId,jdbcType=INTEGER},
+      location = #{record.location,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mio.domain.Book" >
+    update book
+    <set >
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null" >
+        isbn = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="revision != null" >
+        revision = #{revision,jdbcType=VARCHAR},
+      </if>
+      <if test="packaging != null" >
+        packaging = #{packaging,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="wcount != null" >
+        wcount = #{wcount,jdbcType=INTEGER},
+      </if>
+      <if test="paper != null" >
+        paper = #{paper,jdbcType=VARCHAR},
+      </if>
+      <if test="pcount != null" >
+        pcount = #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="suiteNumber != null" >
+        suite_number = #{suiteNumber,jdbcType=INTEGER},
+      </if>
+      <if test="attachment != null" >
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentNumber != null" >
+        attachment_number = #{attachmentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="shelfId != null" >
+        shelf_id = #{shelfId,jdbcType=INTEGER},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mio.domain.Book" >
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      other = #{other,jdbcType=VARCHAR},
+      isbn = #{isbn,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      revision = #{revision,jdbcType=VARCHAR},
+      packaging = #{packaging,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      wcount = #{wcount,jdbcType=INTEGER},
+      paper = #{paper,jdbcType=VARCHAR},
+      pcount = #{pcount,jdbcType=INTEGER},
+      suite_number = #{suiteNumber,jdbcType=INTEGER},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      attachment_number = #{attachmentNumber,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      shelf_id = #{shelfId,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -34,7 +34,13 @@
     <!--//SqlSessionFactory配置，注意此处有大坑（如果你使用Intellij这个ide的话请看后面的填坑指南）-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!--<account:property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+        <!--<property name="mapperLocations" value="WEB-INF/mapper/AccountMapper.xml"/>-->
     </bean>
+
+    <bean id="userService" class="com.mio.service.impl.UserServiceImpl"></bean>
+    <bean id="roomService" class="com.mio.service.impl.RoomServiceImpl"></bean>
+    <bean id="shelfService" class="com.mio.service.impl.ShelfServiceImpl"></bean>
+    <bean id="customerService" class="com.mio.service.impl.CustomerServiceImpl"></bean>
+    <bean id="cardService" class="com.mio.service.impl.CardServiceImpl"></bean>
 
 </beans>
