@@ -66,10 +66,18 @@
 
     </where>
   </select>
-  <select id="findExpireBorrow" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
+  <select id="findExpireBorrow" parameterType="int" resultType="com.mio.domain.BorrowVO">
     <include refid="all"></include>
 
     WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND borrow.expire_time &lt; now() AND borrow.back_time is null;
+  </select>
+  <select id="queryDidNotReturnBorrow" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
+    <include refid="all"></include>
+
+    WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id
+    AND datediff(borrow.expire_time,now()) &lt;#{day}
+    AND datediff(borrow.expire_time,now()) &gt;0
+    AND borrow.back_time is null;
   </select>
 
   <select id="countHoldBooks" parameterType="int" resultType="int">

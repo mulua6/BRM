@@ -45,5 +45,6 @@
     <bean id="bookService" class="com.mio.service.impl.BookServiceImpl"></bean>
     <bean id="borrowService" class="com.mio.service.impl.BorrowServiceImpl"></bean>
     <bean id="deductionService" class="com.mio.service.impl.DeductionServiceImpl"></bean>
+    <bean id="paymentService" class="com.mio.service.impl.PaymentServiceImpl"></bean>
 
 </beans>

@@ -82,6 +82,9 @@
 			<span><a target="right" style="font-size:16px;color:black;text-decoration : none" href='${pageContext.request.contextPath}/go.action?to=statistical/queryButtons'>查询统计</a></span>
 		</li>
 		<li>
+			<span><a target="right" style="font-size:16px;color:black;text-decoration : none" href='${pageContext.request.contextPath}/go.action?to=payment/query'>缴费管理</a></span>
+		</li>
+		<li>
 			<span><a target="right" style="font-size:16px;color:black;text-decoration : none" href='${pageContext.request.contextPath}/cardAction/findAllCards.action'>套餐管理</a></span>
 		</li>
 		<li>

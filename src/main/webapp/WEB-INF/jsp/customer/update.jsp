@@ -47,7 +47,7 @@
                     </tr>
                     <tr><td>套餐</td>
                         <td>
-                            <select name="cardId" cssClass="InputStyle" style="width: 130px;text-align: center">
+                            <select name="cardId" cssClass="InputStyle" disabled="disabled" style="width: 130px;text-align: center">
                                 <c:forEach items="${sessionScope.cardList}" var="card">
                                     <c:if test="${card.id == customer.cardId}">
                                         <option value="${card.id}" selected>${card.cardName}</option>
@@ -100,7 +100,7 @@
                     </tr>
                     <tr><td>押金</td>
                         <td>
-                            <input type="text" name="deposit" value="${customer.deposit}" cssClass="InputStyle"/>
+                            <input type="text" name="deposit" readonly value="${customer.deposit}" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>状态</td>

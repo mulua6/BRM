@@ -32,7 +32,7 @@
 <div id=MainArea>
     <form action="${pageContext.request.contextPath}/customerAction/addCustomer.action" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
-        	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" /> 读者信息 </div>
+        	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" /> 添加读者 </div>
         </div>
         <!-- 表单内容显示 -->
         <div class="ItemBlockBorder">

@@ -129,7 +129,7 @@ public class BorrowAction {
         //判断该用户是否还可以借书
 
 
-
+        //判断用户是否存在
         Customer customer = customerService.findCustomerByCardNumber(cardNumber);
         if (customer==null){
             request.getSession().setAttribute("msg","不存在该用户，请确认!");
