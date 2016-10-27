@@ -2,6 +2,9 @@ package com.mio.testDemo;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * Created by liuhe on 16/8/16.
  * update
@@ -41,6 +44,29 @@ public class IntegerTest {
             System.out.println("yes b = a");
         }
 
+
+    }
+
+
+
+
+    @Test
+    public void stest(){
+
+
+        ArrayList<String> strings = new ArrayList<>();
+
+        strings.add(null);
+        strings.add(null);
+
+        System.out.println(strings.size());
+
+        HashSet<String> set = new HashSet<>();
+
+        set.add(null);
+        set.add(null);
+
+        System.out.println(set.size());
 
     }
 }

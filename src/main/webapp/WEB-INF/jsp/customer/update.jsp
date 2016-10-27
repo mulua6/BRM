@@ -30,7 +30,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="${pageContext.request.contextPath}/customerAction/updateCustomer.action">
+    <form action="${pageContext.request.contextPath}/customerAction/updateCustomer.action" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" /> 读者信息 </div>
         </div>
@@ -61,12 +61,12 @@
                     </tr>
                     <tr><td>卡号</td>
                         <td>
-                            <input type="text" name="customerName" value="${customer.number}" cssClass="InputStyle"/>
+                            <input type="text" name="number" value="${customer.number}" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>电话</td>
                         <td>
-                            <input type="text" name="customerName" value="${customer.phone}" cssClass="InputStyle"/>
+                            <input type="text" name="phone" value="${customer.phone}" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>性别</td>
@@ -85,32 +85,46 @@
                     </tr>
                     <tr><td>生日</td>
                         <td>
-                            <input type="text" name="customerName" value="<fmt:formatDate value="${customer.birthday}" pattern="yyyy-mm-dd"></fmt:formatDate>" cssClass="InputStyle"/>
+                            <input type="text" name="birthday" value="<fmt:formatDate value="${customer.birthday}"  pattern="yyyy-MM-dd"></fmt:formatDate>" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>加入时间</td>
                         <td>
-                            <input type="text" name="customerName" value="<fmt:formatDate value="${customer.createTime}" pattern="yyyy-mm-dd"></fmt:formatDate>" cssClass="InputStyle"/>
+                            <input type="text" name="createTime" value="<fmt:formatDate value="${customer.createTime}" type="date"></fmt:formatDate>" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>到期时间</td>
                         <td>
-                            <input type="text" name="customerName" value="<fmt:formatDate value="${customer.expireTime}" pattern="yyyy-mm-dd"></fmt:formatDate>" cssClass="InputStyle"/>
+                            <input type="text" name="expireTime" value="<fmt:formatDate value="${customer.expireTime}" type="date"></fmt:formatDate>" cssClass="InputStyle"/>
+                        </td>
+                    </tr>
+                    <tr><td>押金</td>
+                        <td>
+                            <input type="text" name="deposit" value="${customer.deposit}" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>状态</td>
                         <td>
-                            <input type="text" name="customerName" value="${customer.status}" cssClass="InputStyle"/>
+                            <select name="status" cssClass="InputStyle" style="width: 130px;text-align: center">
+                                <c:forEach items="${sessionScope.statusList}" var="st">
+                                    <c:if test="${st.number == customer.status}">
+                                        <option value="${st.number}" selected>${st.name}</option>
+                                    </c:if>
+                                    <c:if test="${st.number != customer.status}">
+                                        <option value="${st.number}">${st.name}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
                         </td>
                     </tr>
                     <tr><td>联系地址</td>
                         <td>
-                            <input type="text" name="customerName" value="${customer.address}" cssClass="InputStyle"/>
+                            <input type="text" name="address" value="${customer.address}" cssClass="InputStyle"/>
                         </td>
                     </tr>
                     <tr><td>备注</td>
                         <td>
-                            <input type="text" name="customerName" value="${customer.other}" cssClass="InputStyle"/>
+                            <input type="text" name="other" value="${customer.other}" cssClass="InputStyle"/>
                         </td>
                     </tr>
 

@@ -1,5 +1,7 @@
 package com.mio.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Borrow {
@@ -11,10 +13,13 @@ public class Borrow {
 
     private Integer days;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date borrowTime;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date expireTime;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date backTime;
 
     private Boolean status;

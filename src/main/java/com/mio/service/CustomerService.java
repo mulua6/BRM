@@ -18,4 +18,5 @@ public interface CustomerService {
     void updateCustomer(Customer customer);
 
     Customer findCustomerById(Integer id);
+    Customer findCustomerByCardNumber(Integer cardNumber);
 }

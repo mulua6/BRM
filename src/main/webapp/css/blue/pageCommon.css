@@ -161,6 +161,11 @@ ul {
 }
 
 #MainArea {
+	 width: 100%;
+	 background: url(images/inputPageHeadBg.gif) repeat-x;
+	 border-top: 2px solid #ffffff;
+ }
+#MainArea2 {
 	width: 100%;
 	background: url(images/inputPageHeadBg.gif) repeat-x;
 	border-top: 2px solid #ffffff;

@@ -14,10 +14,10 @@
     <title>Title</title>
 </head>
 <body>
-${a}
-${b}
+${msg}
 
 
-${admin.username}
+<a href="javascript:history.go(-1);">点击返回</a>
+
 </body>
 </html>

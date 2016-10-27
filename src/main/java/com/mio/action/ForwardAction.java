@@ -3,6 +3,8 @@ package com.mio.action;
 import com.mio.domain.Card;
 import com.mio.domain.Status;
 import com.mio.service.CardService;
+import com.mio.service.RoomService;
+import com.mio.service.ShelfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,12 @@ public class ForwardAction {
 
     @Autowired
     CardService cardService;
+
+    @Autowired
+    RoomService roomService;
+    @Autowired
+    ShelfService shelfService;
+
 
     @RequestMapping("forward")
     public String turnTo(String[] turnTo){
@@ -47,6 +55,20 @@ public class ForwardAction {
         statusList.add(new Status(2,"逾期"));
         request.getSession().setAttribute("statusList",statusList);
 
+        //设置图书状态信息
+        /**
+         * 0:正常
+         * 1:丢失
+         * 2:损坏
+         * 3:外借
+         */
+        ArrayList<Status> bookStatusList = new ArrayList<>();
+        bookStatusList.add(new Status(0,"正常"));
+        bookStatusList.add(new Status(1,"丢失"));
+        bookStatusList.add(new Status(2,"损坏"));
+        bookStatusList.add(new Status(3,"外借"));
+        request.getSession().setAttribute("bookStatusList",bookStatusList);
+
         //设置性别
         /**
          * 1:男
@@ -56,6 +78,13 @@ public class ForwardAction {
         sexList.put(0,"女");
         sexList.put(1,"男");
         request.getSession().setAttribute("sexList",sexList);
+
+        //设置书室
+        request.getSession().setAttribute("roomList",roomService.findAllRooms());
+
+        //设置书架
+        request.getSession().setAttribute("shelfList",shelfService.findAllShelfs());
+
 
         return "frame/index";
     }

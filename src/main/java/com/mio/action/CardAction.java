@@ -2,6 +2,7 @@ package com.mio.action;
 
 import com.mio.domain.Card;
 import com.mio.service.CardService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,8 @@ public class CardAction {
 
     @RequestMapping("addCard")
     public String addCard(Card card){
+        DateTime dateTime = new DateTime();
+        dateTime.getDayOfMonth();
         cardService.addCard(card);
         return "redirect:/cardAction/findAllCards.action";
     }

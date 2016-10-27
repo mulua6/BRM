@@ -1,5 +1,7 @@
 package com.mio.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Customer {
@@ -13,23 +15,34 @@ public class Customer {
 
     private Integer sex;
 
+    /**
+     * 0:正常
+     * 1:挂失
+     * 2:逾期
+     */
     private String status;
 
     private String address;
 
     private String other;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createTime;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updateTime;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date expireTime;
 
     private Integer count;
 
     private Integer cardId;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
+
+    private Double deposit;
 
     public Integer getId() {
         return id;
@@ -141,5 +154,13 @@ public class Customer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Double getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(Double deposit) {
+        this.deposit = deposit;
     }
 }

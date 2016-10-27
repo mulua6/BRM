@@ -42,4 +42,18 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer findCustomerById(Integer id) {
         return customerMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public Customer findCustomerByCardNumber(Integer cardNumber) {
+        CustomerExample customerExample = new CustomerExample();
+        CustomerExample.Criteria criteria = customerExample.createCriteria();
+        criteria.andNumberEqualTo(cardNumber);
+        List<Customer> customers = customerMapper.selectByExample(customerExample);
+
+        if (customers.size()<1){
+            return null;
+        }
+        return customers.get(0);
+
+    }
 }

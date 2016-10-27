@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mio.mapper.BorrowVOMapper" >
+  <resultMap id="BaseResultMap" type="com.mio.domain.BorrowVO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="number" property="cardNumber" jdbcType="INTEGER" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="expire_time" property="expireTime" jdbcType="DATE" />
+    <result column="borrow_time" property="borrowTime" jdbcType="DATE" />
+    <result column="back_time" property="backTime" jdbcType="DATE" />
+    <result column="isbn" property="isbn" jdbcType="VARCHAR" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--<sql id="findBorrowByCondition"  >-->
+  <!--SELECT customer.customer_name,customer.number,book.bookName,book.isbn,book.publisher,borrow.borrow_time,borrow.expire_time-->
+  <!--FROM book ,borrow,customer-->
+  <!--WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND customer.id=#{customerId}-->
+
+
+  <!--&lt;!&ndash;<where>&ndash;&gt;-->
+  <!--&lt;!&ndash;book.id=borrow.book_id AND borrow.customer_id=customer.id&ndash;&gt;-->
+  <!--&lt;!&ndash;<choose >&ndash;&gt;-->
+  <!--&lt;!&ndash;<when test="customerId" >&ndash;&gt;-->
+  <!--&lt;!&ndash;and customer.id = ${customerId}&ndash;&gt;-->
+  <!--&lt;!&ndash;</when>&ndash;&gt;-->
+  <!--&lt;!&ndash;</choose>&ndash;&gt;-->
+
+  <!--&lt;!&ndash;</where>&ndash;&gt;-->
+
+  <!--</sql>-->
+
+  <sql id="all">
+    SELECT customer.customer_name customerName,customer.number cardNumber,book.book_name bookName,
+    book.isbn isbn,book.publisher publisher,borrow.borrow_time borrowTime,
+    borrow.expire_time expireTime,borrow.id id,borrow.back_time backTime,borrow.status status
+      FROM book ,borrow,customer
+
+  </sql>
+
+  <select id="findBorrowByCondition2" parameterType="int" resultType="com.mio.domain.BorrowVO">
+    SELECT customer.customer_name customerName,customer.number cardNumber,book.book_name bookName,
+    book.isbn isbn,book.publisher publisher,borrow.borrow_time borrowTime,
+    borrow.expire_time expireTime,borrow.id id,borrow.back_time backTime,borrow.status status
+      FROM book ,borrow,customer
+      WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND customer.id=#{customerId}
+  </select>
+
+  <select id="findBorrowByCondition" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
+    <include refid="all"></include>
+
+    <where>
+      book.id=borrow.book_id AND borrow.customer_id=customer.id
+      <if test="customerId != null">
+        AND customer.id=#{customerId}
+      </if>
+      <if test="bookId != null">
+        AND book.id=#{bookId}
+      </if>
+
+      <if test="startTime != null">
+        AND borrow.borrow_time BETWEEN #{startTime} AND #{endTime}
+      </if>
+
+    </where>
+  </select>
+  <select id="findExpireBorrow" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
+    <include refid="all"></include>
+
+      WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND borrow.expire_time &lt; now() AND borrow.back_time is null;
+  </select>
+
+</mapper>

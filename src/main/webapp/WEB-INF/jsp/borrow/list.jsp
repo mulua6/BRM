@@ -6,7 +6,7 @@
   <head>
    
     
-    <title>读者列表</title>
+    <title>借阅列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,7 +24,7 @@
   <div id="Title_bar_Head"> 
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/css/images/title_arrow.gif"/> 读者管理
+            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/css/images/title_arrow.gif"/> 借阅列表
         </div>
         <div id="Title_End"></div>
     </div>
@@ -35,19 +35,16 @@
         <!-- 表头-->
         <thead>
             <tr align=center valign=middle id=TableTitle>
-                <td width="60">序号</td>
+                <td width="30">序号</td>
                 <td width="60">姓名</td>
-                <td width="60">套餐</td>
-                <td width="100">卡号</td>
-                <td width="100">电话</td>
-                <td width="60">性别</td>
-                <td width="100">生日</td>
-                <td width="80">加入时间</td>
-                <td width="80">到期时间</td>
-                <td width="60">状态</td>
-                <td width="100">联系地址</td>
-                <td width="60">押金</td>
-                <td width="100">备注</td>
+                <td width="60">卡号</td>
+                <td width="60">书名</td>
+                <td width="60">ISBN</td>
+                <td width="100">出版社</td>
+                <td width="100">借书时间</td>
+                <td width="100">到期时间</td>
+                <td width="100">归还时间</td>
+                <%--<td width="60">状态</td>--%>
                 <td>相关操作</td>
             </tr>
         </thead>
@@ -55,48 +52,40 @@
         <!--显示数据列表-->
         <tbody id="TableData" class="dataContainer" datakey="userList">
 
-            <c:forEach items="${customerList}" var="customer" varStatus="s">
+            <c:forEach items="${borrowVOList}" var="borrowVO" varStatus="s">
 
                 <tr class="TableDetail1 template">
                     <td align="center" style="text-align: center">${s.count}</td>
-                    <td align="center" style="text-align: center">${customer.customerName}</td>
+                    <td align="center" style="text-align: left">${borrowVO.customerName}</td>
+                    <td align="center" style="text-align: center">${borrowVO.cardNumber}</td>
+                    <td align="center" style="text-align: center">${borrowVO.bookName}</td>
+                    <td align="center" style="text-align: center">${borrowVO.isbn}</td>
+                    <td align="center" style="text-align: center">${borrowVO.publisher}</td>
+                    <td align="center" style="text-align: center"><fmt:formatDate value="${borrowVO.borrowTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                    <td align="center" style="text-align: center"><fmt:formatDate value="${borrowVO.expireTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 
-                    <%--套餐--%>
                     <td align="center" style="text-align: center">
-                        <c:forEach items="${sessionScope.cardList}" var="card">
 
-                            <c:if test="${customer.cardId == card.id}">
-                                ${card.cardName}
-                            </c:if>
-                        </c:forEach>
-                    </td>
-
-                    <td align="center" style="text-align: center">${customer.number}</td>
-                    <td align="center" style="text-align: center">${customer.phone}</td>
-                    <td align="center" style="text-align: center">
-                        <c:if test="${customer.sex == 1 }">
-                            男
+                        <c:if test="${borrowVO.backTime != null}">
+                            <fmt:formatDate value="${borrowVO.backTime}" pattern="yyyy-MM-dd"></fmt:formatDate>
                         </c:if>
-                        <c:if test="${customer.sex == 0 }">
-                            女
+
+                        <c:if test="${borrowVO.backTime == null}">
+                            <a href="${pageContext.request.contextPath}/borrowAction/backBorrow.action?id=${borrowVO.id}">还书</a> |
+                            <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">续借</a> |
+                            <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">丢失</a> |
+                            <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">破损</a>
                         </c:if>
+
                     </td>
-                    <td align="center" style="text-align: center"><fmt:formatDate value="${customer.birthday}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-                    <td align="center" style="text-align: center"><fmt:formatDate value="${customer.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-                    <td align="center" style="text-align: center"><fmt:formatDate value="${customer.expireTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-                    <%--状态--%>
-                    <td align="center" style="text-align: center">
-                        <c:forEach items="${sessionScope.statusList}" var="st">
-                            <c:if test="${customer.status == st.number}">
-                                ${st.name}
-                            </c:if>
-                        </c:forEach>
-                    </td>
-                    <td align="center" style="text-align: center">${customer.address}</td>
-                    <td align="center" style="text-align: center" disabled="true">${customer.deposit}</td>
-                    <td align="center" style="text-align: center">${customer.other}</td>
-                    <td><a href="${pageContext.request.contextPath}/customerAction/deleteCustomer.action?id=${customer.id}">删除</a> |
-                        <a href="${pageContext.request.contextPath}/customerAction/preUpdateCustomer.action?id=${customer.id}">修改</a>
+
+
+
+                <%--<td align="center" style="text-align: center">${borrowVO.status}</td>--%>
+
+                    <td>
+                        <a href="${pageContext.request.contextPath}/borrowVOAction/deleteBook.action?id=${borrowVO.id}">删除</a>
+                        <%--<a href="${pageContext.request.contextPath}/borrowVOAction/preUpdateBook.action?id=${borrowVO.id}">修改</a>--%>
                     </td>
                 </tr>
 
@@ -107,7 +96,7 @@
     
        <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="${pageContext.request.contextPath}/go.action?to=customer/add"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>
+        <%--<a href="${pageContext.request.contextPath}/go.action?to=borrowVO/preAdd"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>--%>
         </div>
     </div>
     

@@ -1,5 +1,9 @@
 package com.mio.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Book {
     private Integer id;
 
@@ -7,7 +11,7 @@ public class Book {
 
     private Integer number;
 
-    private String status;
+    private String status;//0:正常 1：丢失 2：损坏 3：外借
 
     private String other;
 
@@ -42,6 +46,15 @@ public class Book {
     private Integer shelfId;
 
     private String location;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date publishTime;
+
+    private Double price;
+
+    private String image;
+
+    private String link;
 
     public Integer getId() {
         return id;
@@ -209,5 +222,37 @@ public class Book {
 
     public void setLocation(String location) {
         this.location = location == null ? null : location.trim();
+    }
+
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image == null ? null : image.trim();
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link == null ? null : link.trim();
     }
 }
