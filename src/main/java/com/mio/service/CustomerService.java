@@ -1,6 +1,7 @@
 package com.mio.service;
 
 import com.mio.domain.Customer;
+import com.mio.domain.CustomerTypeVO;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface CustomerService {
 
     Customer findCustomerById(Integer id);
     Customer findCustomerByCardNumber(Integer cardNumber);
+
+    Double countDeposit();
+
+    List<CustomerTypeVO> countCustomerType();
 }

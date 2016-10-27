@@ -30,7 +30,7 @@
 
 <!--显示表单内容-->
 <div id=MainArea>
-    <form action="${pageContext.request.contextPath}/borrowAction/queryBorrow.action" method="post">
+    <form action="${pageContext.request.contextPath}/borrowAction/queryBorrow.action?list=part" method="post">
         <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
         	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" /> 借阅查询 </div>
         </div>

@@ -23,7 +23,7 @@ public interface BorrowService {
     Borrow findBorrowById(Integer id);
 
 
-    List<BorrowVO> findBorrowByConditions(String customerName,Integer customerId, Integer bookId, Date startTime, Date endTIme);
+    List<BorrowVO> findBorrowByConditions(String customerName,Integer customerId, Integer bookId, Date startTime, Date endTIme,String list);
 
     List<BorrowVO> findExpireBorrow();
 
@@ -44,4 +44,8 @@ public interface BorrowService {
      * @return true:达到上限 false：没有达到上限
      */
     Boolean checkIfOverCeiling(Customer customer);
+
+    List<BorrowVO> findBookRanking();
+
+    List<BorrowVO> findCustomerRanking();
 }

@@ -2,6 +2,7 @@ package com.mio.action;
 
 import com.mio.domain.Card;
 import com.mio.domain.Customer;
+import com.mio.domain.CustomerTypeVO;
 import com.mio.domain.Payment;
 import com.mio.service.CardService;
 import com.mio.service.CustomerService;
@@ -42,6 +43,19 @@ public class CustomerAction {
         request.getSession().setAttribute("customers",customerList);
 
         modelAndView.setViewName("customer/list");
+        return modelAndView;
+    }
+
+    @RequestMapping("countCustomer")
+    public ModelAndView countCustomer(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<CustomerTypeVO> customerTypeVOList = customerService.countCustomerType();
+
+        modelAndView.addObject("customerTypeVOList",customerTypeVOList);
+        modelAndView.addObject("title","客户套餐统计");
+
+        modelAndView.setViewName("statistical/customerCountList");
         return modelAndView;
     }
 

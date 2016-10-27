@@ -3,6 +3,8 @@ package com.mio.mapper;
 import com.mio.domain.Customer;
 import com.mio.domain.CustomerExample;
 import java.util.List;
+
+import com.mio.domain.CustomerTypeVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface CustomerMapper {
@@ -27,4 +29,8 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    Double countDeposit();
+
+    List<CustomerTypeVO> countCustomerType();
 }

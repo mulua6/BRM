@@ -51,7 +51,7 @@ public class BorrowServiceImpl implements BorrowService{
 
     @Override
     @SuppressWarnings("all")
-    public List<BorrowVO> findBorrowByConditions(String customerName,Integer customerId, Integer bookId, Date startTime, Date endTime) {
+    public List<BorrowVO> findBorrowByConditions(String customerName,Integer customerId, Integer bookId, Date startTime, Date endTime,String list) {
         QueryBorrowVO queryBorrowVO = new QueryBorrowVO();
         queryBorrowVO.setBookId(bookId);
         queryBorrowVO.setCustomerId(customerId);
@@ -71,7 +71,12 @@ public class BorrowServiceImpl implements BorrowService{
             queryBorrowVO.setEndTime(null);
         }
 
-        return  borrowVOMapper.findBorrowByCondition(queryBorrowVO);
+        if ("part".equals(list)){
+            return  borrowVOMapper.findBorrowByCondition(queryBorrowVO);
+        }else {
+            //all
+            return  borrowVOMapper.findAllBorrowByCondition(queryBorrowVO);
+        }
 
     }
 
@@ -108,5 +113,15 @@ public class BorrowServiceImpl implements BorrowService{
 
 
         return hold >= number;
+    }
+
+    @Override
+    public List<BorrowVO> findBookRanking() {
+        return borrowVOMapper.findBookRanking();
+    }
+
+    @Override
+    public List<BorrowVO> findCustomerRanking() {
+        return borrowVOMapper.findCustomerRanking();
     }
 }

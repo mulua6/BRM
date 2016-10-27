@@ -3,6 +3,8 @@ package com.mio.mapper;
 import com.mio.domain.Borrow;
 import com.mio.domain.BorrowExample;
 import java.util.List;
+
+import com.mio.domain.BorrowVO;
 import org.apache.ibatis.annotations.Param;
 
 public interface BorrowMapper {
@@ -27,4 +29,5 @@ public interface BorrowMapper {
     int updateByPrimaryKeySelective(Borrow record);
 
     int updateByPrimaryKey(Borrow record);
+
 }

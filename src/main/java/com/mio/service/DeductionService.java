@@ -18,4 +18,6 @@ public interface DeductionService {
     void updateDeduction(Deduction deduction);
 
     Deduction findDeductionById(Integer id);
+
+    Double countMoney();
 }

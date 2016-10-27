@@ -96,7 +96,7 @@
     
        <div id="TableTail">
         <div id="TableTail_inside">
-        <%--<a href="${pageContext.request.contextPath}/go.action?to=borrowVO/preAdd"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>--%>
+        <a href="${pageContext.request.contextPath}/borrowAction/queryBorrow.action?list=all"><button  cssClass="InputStyle">显示全部借书记录</button></a>
         </div>
     </div>
     

@@ -3,6 +3,7 @@ package com.mio.service.impl;
 import com.mio.domain.Customer;
 import com.mio.domain.Payment;
 import com.mio.domain.PaymentExample;
+import com.mio.domain.PaymentVO;
 import com.mio.mapper.CustomerMapper;
 import com.mio.mapper.PaymentMapper;
 import com.mio.service.CustomerService;
@@ -112,5 +113,11 @@ public class PaymentServiceImpl implements PaymentService{
         PaymentExample paymentExample = new PaymentExample();
         paymentExample.createCriteria().andCustomerIdEqualTo(id);
         return paymentMapper.selectByExample(paymentExample);
+    }
+
+    @Override
+    public PaymentVO countAllPayment() {
+
+        return paymentMapper.countAllPayment();
     }
 }

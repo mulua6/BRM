@@ -18,4 +18,10 @@ public interface BorrowVOMapper {
     List<BorrowVO> queryDidNotReturnBorrow(Integer days);
 
     int countHoldBooks(Integer customerId);
+
+    List<BorrowVO> findBookRanking();
+
+    List<BorrowVO> findCustomerRanking();
+
+    List<BorrowVO> findAllBorrowByCondition(QueryBorrowVO queryBorrowVO);
 }

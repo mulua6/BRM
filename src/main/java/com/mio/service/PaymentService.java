@@ -1,6 +1,7 @@
 package com.mio.service;
 
 import com.mio.domain.Payment;
+import com.mio.domain.PaymentVO;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public interface PaymentService {
     Payment findPaymentById(Integer id);
 
     List<Payment> findPaymentByCustomerId(Integer id);
+
+    PaymentVO countAllPayment();
 }

@@ -2,7 +2,9 @@ package com.mio.action;
 
 import com.mio.domain.Customer;
 import com.mio.domain.Payment;
+import com.mio.domain.PaymentVO;
 import com.mio.service.CustomerService;
+import com.mio.service.DeductionService;
 import com.mio.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ public class PaymentAction {
     public PaymentService paymentService;
     @Autowired
     public CustomerService customerService;
+    @Autowired
+    public DeductionService deductionService;
 
     @RequestMapping("findAllPayments")
     public ModelAndView listPayments(HttpServletRequest request){
@@ -113,6 +117,32 @@ public class PaymentAction {
         ModelAndView modelAndView = new ModelAndView("payment/update");
         modelAndView.addObject("payment",payment);
         modelAndView.addObject("customer",customer);
+        return modelAndView;
+    }
+
+
+    /**
+     * 统计所有缴费
+     * @param request
+     * @return
+     */
+    @RequestMapping("countAllPayments")
+    public ModelAndView countAllPayments(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+
+        PaymentVO paymentVO =  paymentService.countAllPayment();
+
+        modelAndView.setViewName("statistical/count");
+        modelAndView.addObject("count",paymentVO);
+
+
+        Double deductionMoenySum = deductionService.countMoney();
+        Double customerDepositSum = customerService.countDeposit();
+
+
+        modelAndView.addObject("deductionMoenySum",deductionMoenySum);
+        modelAndView.addObject("customerDepositSum",customerDepositSum);
+        modelAndView.addObject("title","财务统计");
         return modelAndView;
     }
 }

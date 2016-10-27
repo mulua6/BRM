@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from deduction
     where id = #{id,jdbcType=INTEGER}
@@ -196,12 +196,12 @@
   <update id="updateByExample" parameterType="map" >
     update deduction
     set id = #{record.id,jdbcType=INTEGER},
-      customer_id = #{record.customerId,jdbcType=INTEGER},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      reason = #{record.reason,jdbcType=VARCHAR},
-      money = #{record.money,jdbcType=DOUBLE},
-      create_time = #{record.createTime,jdbcType=DATE},
-      borrow_id = #{record.borrowId,jdbcType=INTEGER}
+    customer_id = #{record.customerId,jdbcType=INTEGER},
+    book_id = #{record.bookId,jdbcType=INTEGER},
+    reason = #{record.reason,jdbcType=VARCHAR},
+    money = #{record.money,jdbcType=DOUBLE},
+    create_time = #{record.createTime,jdbcType=DATE},
+    borrow_id = #{record.borrowId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -240,4 +240,11 @@
       borrow_id = #{borrowId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="countMoney"  resultType="double">
+    SELECT sum(money) moneySum FROM deduction;
+  </select>
+
 </mapper>

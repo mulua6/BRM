@@ -2,6 +2,7 @@ package com.mio.service.impl;
 
 import com.mio.domain.Customer;
 import com.mio.domain.CustomerExample;
+import com.mio.domain.CustomerTypeVO;
 import com.mio.mapper.CustomerMapper;
 import com.mio.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,17 @@ public class CustomerServiceImpl implements CustomerService{
             return null;
         }
         return customers.get(0);
+
+    }
+
+    @Override
+    public Double countDeposit() {
+        return customerMapper.countDeposit();
+    }
+
+    @Override
+    public List<CustomerTypeVO> countCustomerType() {
+        return customerMapper.countCustomerType();
 
     }
 }

@@ -95,7 +95,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from customer
     where id = #{id,jdbcType=INTEGER}
@@ -111,18 +111,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mio.domain.Customer" >
-    insert into customer (id, customer_name, number, 
-      phone, sex, status, 
-      address, other, create_time, 
-      update_time, expire_time, count, 
-      card_id, birthday, deposit
-      )
-    values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
-      #{updateTime,jdbcType=DATE}, #{expireTime,jdbcType=DATE}, #{count,jdbcType=INTEGER}, 
-      #{cardId,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{deposit,jdbcType=DOUBLE}
-      )
+    insert into customer (id, customer_name, number,
+    phone, sex, status,
+    address, other, create_time,
+    update_time, expire_time, count,
+    card_id, birthday, deposit
+    )
+    values (#{id,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER},
+    #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE},
+    #{updateTime,jdbcType=DATE}, #{expireTime,jdbcType=DATE}, #{count,jdbcType=INTEGER},
+    #{cardId,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{deposit,jdbcType=DOUBLE}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.mio.domain.Customer" >
     insert into customer
@@ -283,20 +283,20 @@
   <update id="updateByExample" parameterType="map" >
     update customer
     set id = #{record.id,jdbcType=INTEGER},
-      customer_name = #{record.customerName,jdbcType=VARCHAR},
-      number = #{record.number,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      other = #{record.other,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=DATE},
-      update_time = #{record.updateTime,jdbcType=DATE},
-      expire_time = #{record.expireTime,jdbcType=DATE},
-      count = #{record.count,jdbcType=INTEGER},
-      card_id = #{record.cardId,jdbcType=INTEGER},
-      birthday = #{record.birthday,jdbcType=DATE},
-      deposit = #{record.deposit,jdbcType=DOUBLE}
+    customer_name = #{record.customerName,jdbcType=VARCHAR},
+    number = #{record.number,jdbcType=INTEGER},
+    phone = #{record.phone,jdbcType=VARCHAR},
+    sex = #{record.sex,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=VARCHAR},
+    address = #{record.address,jdbcType=VARCHAR},
+    other = #{record.other,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=DATE},
+    update_time = #{record.updateTime,jdbcType=DATE},
+    expire_time = #{record.expireTime,jdbcType=DATE},
+    count = #{record.count,jdbcType=INTEGER},
+    card_id = #{record.cardId,jdbcType=INTEGER},
+    birthday = #{record.birthday,jdbcType=DATE},
+    deposit = #{record.deposit,jdbcType=DOUBLE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -352,19 +352,28 @@
   <update id="updateByPrimaryKey" parameterType="com.mio.domain.Customer" >
     update customer
     set customer_name = #{customerName,jdbcType=VARCHAR},
-      number = #{number,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      other = #{other,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=DATE},
-      update_time = #{updateTime,jdbcType=DATE},
-      expire_time = #{expireTime,jdbcType=DATE},
-      count = #{count,jdbcType=INTEGER},
-      card_id = #{cardId,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=DATE},
-      deposit = #{deposit,jdbcType=DOUBLE}
+    number = #{number,jdbcType=INTEGER},
+    phone = #{phone,jdbcType=VARCHAR},
+    sex = #{sex,jdbcType=INTEGER},
+    status = #{status,jdbcType=VARCHAR},
+    address = #{address,jdbcType=VARCHAR},
+    other = #{other,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=DATE},
+    update_time = #{updateTime,jdbcType=DATE},
+    expire_time = #{expireTime,jdbcType=DATE},
+    count = #{count,jdbcType=INTEGER},
+    card_id = #{cardId,jdbcType=INTEGER},
+    birthday = #{birthday,jdbcType=DATE},
+    deposit = #{deposit,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="countDeposit"  resultType="double">
+    SELECT sum(deposit) depositSum FROM customer;
+  </select>
+
+  <select id="countCustomerType"  resultType="com.mio.domain.CustomerTypeVO">
+    select count(id) number, card_id cardId from customer group by card_id;
+  </select>
 </mapper>

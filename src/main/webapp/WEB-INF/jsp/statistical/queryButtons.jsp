@@ -40,8 +40,8 @@
 
                     <tr>
                         <td>
-                            <a href="/borrowAction/queryDidNotReturnBorrow.action?days=3">
-                                <button cssClass="InputStyle" >查询3天内应还书刊</button>
+                            <a href="/customerAction/countCustomer.action">
+                                <button cssClass="InputStyle">读者统计</button>
                             </a>
                         </td>
                         <td>
@@ -51,19 +51,36 @@
                         </td>
 
                     </tr>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<a href="/borrowAction/queryBorrow.action">--%>
-                                <%--<button cssClass="InputStyle" >查询3天内应还书刊</button>--%>
-                            <%--</a>--%>
-                        <%--</td>--%>
-                        <%--<td>--%>
-                            <%--<a href="/borrowAction/queryExpireBorrow.action">--%>
-                                <%--<button cssClass="InputStyle">查询逾期未还书刊</button>--%>
-                            <%--</a>--%>
-                        <%--</td>--%>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/paymentAction/countAllPayments.action">
+                                <button cssClass="InputStyle" >财务统计</button>
+                            </a>
+                        </td>
 
-                    <%--</tr>--%>
+                        <td>
+                            <a href="/borrowAction/queryDidNotReturnBorrow.action?days=3">
+                                <button cssClass="InputStyle" >查询3天内应还书刊</button>
+                            </a>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="/borrowAction/queryBookRanking.action">
+                                <button cssClass="InputStyle">书刊借阅排行</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/borrowAction/queryCustomerRanking.action">
+                                <button cssClass="InputStyle">读者借阅排行</button>
+                            </a>
+                        </td>
+
+                    </tr>
                     <%--<tr>--%>
                         <%--<td>--%>
                             <%--<a href="/borrowAction/queryBorrow.action">--%>

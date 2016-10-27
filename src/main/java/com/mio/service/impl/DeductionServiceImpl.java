@@ -42,5 +42,10 @@ public class DeductionServiceImpl implements DeductionService{
         return deductionMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public Double countMoney() {
+        return deductionMapper.countMoney();
+    }
+
 
 }

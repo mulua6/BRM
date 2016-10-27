@@ -61,6 +61,7 @@ public class BorrowAction {
                                         String isbn,
                                         @DateTimeFormat(pattern="yyyy-MM-dd")Date startTime,
                                         @DateTimeFormat(pattern="yyyy-MM-dd")Date endTime,
+                                        String list,
                                     HttpServletRequest request){
             ModelAndView modelAndView = new ModelAndView();
 
@@ -85,7 +86,7 @@ public class BorrowAction {
         }
 
 
-        List<BorrowVO> borrowVOList = borrowService.findBorrowByConditions(customerName,customer.getId(),book.getId(),startTime, endTime);
+        List<BorrowVO> borrowVOList = borrowService.findBorrowByConditions(customerName,customer.getId(),book.getId(),startTime, endTime,list);
 
 
 
@@ -95,12 +96,31 @@ public class BorrowAction {
             return modelAndView;
         }
     @RequestMapping("queryExpireBorrow")
-    public ModelAndView queryExpireBorrow(ModelAndView modelAndView){
+    public ModelAndView  queryExpireBorrow(ModelAndView modelAndView){
 
         List<BorrowVO> borrowVOList = borrowService.findExpireBorrow();
         modelAndView.addObject("borrowVOList",borrowVOList);
         modelAndView.addObject("title","逾期未还还图书");
         modelAndView.setViewName("statistical/list");
+        return modelAndView;
+    }
+
+    @RequestMapping("queryBookRanking")
+    public ModelAndView queryBookRanking(ModelAndView modelAndView){
+
+        List<BorrowVO> borrowVOList = borrowService.findBookRanking();
+        modelAndView.addObject("borrowVOList",borrowVOList);
+        modelAndView.addObject("title","图书借阅排行");
+        modelAndView.setViewName("statistical/bookRankingList");
+        return modelAndView;
+    }
+    @RequestMapping("queryCustomerRanking")
+    public ModelAndView queryCustomerRanking(ModelAndView modelAndView){
+
+        List<BorrowVO> borrowVOList = borrowService.findCustomerRanking();
+        modelAndView.addObject("borrowVOList",borrowVOList);
+        modelAndView.addObject("title","读者借阅排行");
+        modelAndView.setViewName("statistical/customerRankingList");
         return modelAndView;
     }
     @RequestMapping("queryDidNotReturnBorrow")
