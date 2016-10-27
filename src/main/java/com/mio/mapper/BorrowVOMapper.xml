@@ -69,13 +69,13 @@
   <select id="findExpireBorrow" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
     <include refid="all"></include>
 
-      WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND borrow.expire_time &lt; now() AND borrow.back_time is null;
+    WHERE book.id=borrow.book_id AND borrow.customer_id=customer.id AND borrow.expire_time &lt; now() AND borrow.back_time is null;
   </select>
 
   <select id="countHoldBooks" parameterType="int" resultType="int">
-    SELECT cout(id) from borrow
+    SELECT COUNT(id) FROM borrow
 
-      WHERE borrow.customer_id = #{customerId} AND borrow.back_time is null;
+    WHERE borrow.customer_id = #{customerId} AND borrow.back_time is null;
   </select>
 
 </mapper>
