@@ -54,4 +54,9 @@ public class BookServiceImpl implements BookService{
         return books.get(0);
 
     }
+
+    @Override
+    public List<Book> findBookByInput(String input) {
+        return bookMapper.findBookByInput("%"+input+"%");
+    }
 }

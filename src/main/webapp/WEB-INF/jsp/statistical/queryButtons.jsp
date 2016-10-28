@@ -107,16 +107,14 @@
         <div class="ItemBlock">
             <table cellpadding="0" cellspacing="0" class="mainForm">
 
-                <form>
+                <form action="/bookAction/findBookByInput.action" method="post">
 
                     <tr>
                         <td>
-                            <input type="text" cssClass="InputStyle"/>
+                            <input type="text" name="input" cssClass="InputStyle"/>
                         </td>
                         <td>
-                            <a href="/borrowAction/queryExpireBorrow.action">
                                 <button cssClass="InputStyle">根据书名或者作者名查询</button>
-                            </a>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

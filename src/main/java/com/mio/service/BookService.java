@@ -19,4 +19,7 @@ public interface BookService {
 
     Book findBookById(Integer id);
     Book findBookByISBN(String isbn);
+
+
+    List<Book> findBookByInput(String input);
 }

@@ -106,7 +106,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from book
     where id = #{id,jdbcType=INTEGER}
@@ -390,30 +390,30 @@
   <update id="updateByExample" parameterType="map" >
     update book
     set id = #{record.id,jdbcType=INTEGER},
-      book_name = #{record.bookName,jdbcType=VARCHAR},
-      number = #{record.number,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=VARCHAR},
-      other = #{record.other,jdbcType=VARCHAR},
-      isbn = #{record.isbn,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR},
-      author = #{record.author,jdbcType=VARCHAR},
-      publisher = #{record.publisher,jdbcType=VARCHAR},
-      revision = #{record.revision,jdbcType=VARCHAR},
-      packaging = #{record.packaging,jdbcType=VARCHAR},
-      size = #{record.size,jdbcType=VARCHAR},
-      wcount = #{record.wcount,jdbcType=INTEGER},
-      paper = #{record.paper,jdbcType=VARCHAR},
-      pcount = #{record.pcount,jdbcType=INTEGER},
-      suite_number = #{record.suiteNumber,jdbcType=INTEGER},
-      attachment = #{record.attachment,jdbcType=VARCHAR},
-      attachment_number = #{record.attachmentNumber,jdbcType=INTEGER},
-      room_id = #{record.roomId,jdbcType=INTEGER},
-      shelf_id = #{record.shelfId,jdbcType=INTEGER},
-      location = #{record.location,jdbcType=VARCHAR},
-      publish_time = #{record.publishTime,jdbcType=DATE},
-      price = #{record.price,jdbcType=DOUBLE},
-      image = #{record.image,jdbcType=VARCHAR},
-      link = #{record.link,jdbcType=VARCHAR}
+    book_name = #{record.bookName,jdbcType=VARCHAR},
+    number = #{record.number,jdbcType=INTEGER},
+    status = #{record.status,jdbcType=VARCHAR},
+    other = #{record.other,jdbcType=VARCHAR},
+    isbn = #{record.isbn,jdbcType=VARCHAR},
+    code = #{record.code,jdbcType=VARCHAR},
+    author = #{record.author,jdbcType=VARCHAR},
+    publisher = #{record.publisher,jdbcType=VARCHAR},
+    revision = #{record.revision,jdbcType=VARCHAR},
+    packaging = #{record.packaging,jdbcType=VARCHAR},
+    size = #{record.size,jdbcType=VARCHAR},
+    wcount = #{record.wcount,jdbcType=INTEGER},
+    paper = #{record.paper,jdbcType=VARCHAR},
+    pcount = #{record.pcount,jdbcType=INTEGER},
+    suite_number = #{record.suiteNumber,jdbcType=INTEGER},
+    attachment = #{record.attachment,jdbcType=VARCHAR},
+    attachment_number = #{record.attachmentNumber,jdbcType=INTEGER},
+    room_id = #{record.roomId,jdbcType=INTEGER},
+    shelf_id = #{record.shelfId,jdbcType=INTEGER},
+    location = #{record.location,jdbcType=VARCHAR},
+    publish_time = #{record.publishTime,jdbcType=DATE},
+    price = #{record.price,jdbcType=DOUBLE},
+    image = #{record.image,jdbcType=VARCHAR},
+    link = #{record.link,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -524,4 +524,9 @@
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findBookByInput"  resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"></include>  FROM book
+    WHERE book.book_name LIKE #{input} OR book.author LIKE #{input} OR book.isbn LIKE #{input}
+  </select>
 </mapper>

@@ -38,6 +38,25 @@ public class BookAction {
         return modelAndView;
     }
 
+    /**
+     * 模糊匹配 书名 作者名 isbn
+     * @param request
+     * @return
+     */
+    @RequestMapping("findBookByInput")
+    public ModelAndView listBooks(HttpServletRequest request,String input){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Book> bookList = bookService.findBookByInput(input);
+
+        modelAndView.addObject("bookList",bookList);
+
+        request.getSession().setAttribute("books",bookList);
+
+        modelAndView.setViewName("book/list");
+        return modelAndView;
+    }
+
     @RequestMapping("addBook")
     public String addBook(Book book,HttpServletRequest request){
         book = HttpUtil.dangdangSearch(book);
