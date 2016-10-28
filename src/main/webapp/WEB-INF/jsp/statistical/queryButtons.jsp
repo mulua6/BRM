@@ -81,19 +81,19 @@
                         </td>
 
                     </tr>
-                    <%--<tr>--%>
-                        <%--<td>--%>
-                            <%--<a href="/borrowAction/queryBorrow.action">--%>
-                                <%--<button cssClass="InputStyle" >查询3天内应还书刊</button>--%>
-                            <%--</a>--%>
-                        <%--</td>--%>
-                        <%--<td>--%>
-                            <%--<a href="/borrowAction/queryExpireBorrow.action">--%>
-                                <%--<button cssClass="InputStyle">查询逾期未还书刊</button>--%>
-                            <%--</a>--%>
-                        <%--</td>--%>
+                    <tr>
+                        <td>
+                            <a href="/customerAction/queryNearExpireCustomer.action">
+                                <button cssClass="InputStyle">查询快过期读者</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/customerAction/queryLackDepositCustomer.action">
+                                <button cssClass="InputStyle">查询押金不足读者</button>
+                            </a>
+                        </td>
 
-                    <%--</tr>--%>
+                    </tr>
 
                 </table>
             </div>

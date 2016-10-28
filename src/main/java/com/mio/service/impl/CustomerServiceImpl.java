@@ -5,6 +5,7 @@ import com.mio.domain.CustomerExample;
 import com.mio.domain.CustomerTypeVO;
 import com.mio.mapper.CustomerMapper;
 import com.mio.service.CustomerService;
+import com.mio.utils.ConfHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -72,5 +73,18 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public List<Customer> findCustomerByInput(String input) {
         return customerMapper.findCustomerByInput(input);
+    }
+
+    @Override
+    public List<Customer> queryNearExpireCustomer() {
+
+        int days = ConfHelper.getIntConfig("near.expire.days");
+        return customerMapper.queryNearExpireCustomer(days);
+    }
+
+    @Override
+    public List<Customer> queryLackDepositCustomer() {
+        int money = ConfHelper.getIntConfig("lack.deposit");
+        return customerMapper.queryLackDepositCustomer(money);
     }
 }

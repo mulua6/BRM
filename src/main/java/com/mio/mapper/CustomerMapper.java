@@ -35,4 +35,8 @@ public interface CustomerMapper {
     List<CustomerTypeVO> countCustomerType();
 
     List<Customer> findCustomerByInput(String input);
+
+    List<Customer> queryNearExpireCustomer(int days);
+
+    List<Customer> queryLackDepositCustomer(int money);
 }

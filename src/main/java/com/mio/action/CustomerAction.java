@@ -45,6 +45,32 @@ public class CustomerAction {
         modelAndView.setViewName("customer/list");
         return modelAndView;
     }
+    @RequestMapping("queryNearExpireCustomer")
+    public ModelAndView queryNearExpireCustomer(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Customer> customerList = customerService.queryNearExpireCustomer();
+
+        modelAndView.addObject("customerList",customerList);
+
+        request.getSession().setAttribute("customers",customerList);
+
+        modelAndView.setViewName("customer/list");
+        return modelAndView;
+    }
+    @RequestMapping("queryLackDepositCustomer")
+    public ModelAndView queryLackDepositCustomer(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Customer> customerList = customerService.queryLackDepositCustomer();
+
+        modelAndView.addObject("customerList",customerList);
+
+        request.getSession().setAttribute("customers",customerList);
+
+        modelAndView.setViewName("customer/list");
+        return modelAndView;
+    }
     @RequestMapping("findCustomerByInput")
     public ModelAndView findCustomerByInput(HttpServletRequest request,String input){
         ModelAndView modelAndView = new ModelAndView();

@@ -26,4 +26,8 @@ public interface CustomerService {
     List<CustomerTypeVO> countCustomerType();
 
     List<Customer> findCustomerByInput(String input);
+
+    List<Customer> queryNearExpireCustomer();
+
+    List<Customer> queryLackDepositCustomer();
 }

@@ -171,7 +171,9 @@ public class HttpUtil {
 
         String attr = findAttr(firstResult, "search_pre_price");
 //        String attr = findAttr(firstResult, "search_now_price");
-        book.setPrice(Double.parseDouble(attr.substring(1)));
+        if (attr!=null){
+            book.setPrice(Double.parseDouble(attr.substring(1)));
+        }
 //        System.out.println(attr);
 
 //        Elements search_pre_price = firstResult.getElementsByClass("search_pre_price");
@@ -184,18 +186,24 @@ public class HttpUtil {
         //设置作者
 
         String search_book_author = findAttr(firstResult, "search_book_author");
-        String[] split = search_book_author.split("/");
 
-        book.setAuthor(split[0]);
+        if (search_book_author!=null){
+            String[] split = search_book_author.split("/");
+            book.setAuthor(split[0]);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            try {
+//                book.setPublishTime(sdf.parse(split[1].trim()));
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        System.out.println(split[1].trim());
-        try {
-            book.setPublishTime(sdf.parse(split[1].trim()));
-        } catch (ParseException e) {
-            e.printStackTrace();
+            if (split.length>3){
+                book.setPublisher(split[2]);
+            }
         }
-        book.setPublisher(split[2]);
+
+
+
 //        book.setBookName(findAttr(firstResult, "name"));
 //        book.setOther(findAttr(firstResult,"detail"));
 
@@ -214,8 +222,11 @@ public class HttpUtil {
 //        Elements search_pre_price = doc.getElementsByClass(className);
 //        Element element = search_pre_price.get(0);
 //        String text = element.text();
-
-        return doc.getElementsByClass(className).get(0).text();
+        if (doc.getElementsByClass(className).size()>0){
+            return doc.getElementsByClass(className).get(0).text();
+        }{
+            return null;
+        }
     }
 
 }
