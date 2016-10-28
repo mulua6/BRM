@@ -24,4 +24,6 @@ public interface CustomerService {
     Double countDeposit();
 
     List<CustomerTypeVO> countCustomerType();
+
+    List<Customer> findCustomerByInput(String input);
 }

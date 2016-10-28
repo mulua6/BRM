@@ -99,6 +99,66 @@
             </div>
         </div>
 
+    <div class="ItemBlock_Title1"><!-- 信息说明 --><div class="ItemBlock_Title1">
+        <img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" /> 条件查询 </div>
+    </div>
+    <!-- 表单内容显示 -->
+    <div class="ItemBlockBorder">
+        <div class="ItemBlock">
+            <table cellpadding="0" cellspacing="0" class="mainForm">
+
+                <form>
+
+                    <tr>
+                        <td>
+                            <input type="text" cssClass="InputStyle"/>
+                        </td>
+                        <td>
+                            <a href="/borrowAction/queryExpireBorrow.action">
+                                <button cssClass="InputStyle">根据书名或者作者名查询</button>
+                            </a>
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                    </tr>
+                </form>
+
+            </table>
+        </div>
+    </div>
+
+    <!-- 表单内容显示 -->
+    <div class="ItemBlockBorder">
+        <div class="ItemBlock">
+            <table cellpadding="0" cellspacing="0" class="mainForm">
+
+                <form action="/customerAction/findCustomerByInput.action" method="post">
+
+                    <tr>
+                        <td>
+                            <input type="text" name="input" cssClass="InputStyle"/>
+                        </td>
+                        <td>
+                                <button cssClass="InputStyle">查询用户</button>
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                    </tr>
+                </form>
+
+            </table>
+        </div>
+    </div>
+
 
 
         <%--<!-- 表单操作 -->--%>

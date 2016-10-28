@@ -68,4 +68,9 @@ public class CustomerServiceImpl implements CustomerService{
         return customerMapper.countCustomerType();
 
     }
+
+    @Override
+    public List<Customer> findCustomerByInput(String input) {
+        return customerMapper.findCustomerByInput(input);
+    }
 }

@@ -45,6 +45,19 @@ public class CustomerAction {
         modelAndView.setViewName("customer/list");
         return modelAndView;
     }
+    @RequestMapping("findCustomerByInput")
+    public ModelAndView findCustomerByInput(HttpServletRequest request,String input){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Customer> customerList = customerService.findCustomerByInput(input);
+
+        modelAndView.addObject("customerList",customerList);
+
+        request.getSession().setAttribute("customers",customerList);
+
+        modelAndView.setViewName("customer/list");
+        return modelAndView;
+    }
 
     @RequestMapping("countCustomer")
     public ModelAndView countCustomer(HttpServletRequest request){

@@ -33,4 +33,6 @@ public interface CustomerMapper {
     Double countDeposit();
 
     List<CustomerTypeVO> countCustomerType();
+
+    List<Customer> findCustomerByInput(String input);
 }

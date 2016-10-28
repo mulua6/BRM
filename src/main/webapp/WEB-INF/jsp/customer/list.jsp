@@ -30,6 +30,12 @@
     </div>
 </div>
     <div id="MainArea">
+
+        <div id="TableTail">
+            <div id="TableTail_inside">
+                <a href="${pageContext.request.contextPath}/go.action?to=customer/add"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>
+            </div>
+        </div>
     <table cellspacing="0" cellpadding="0" class="TableStyle">
        
         <!-- 表头-->
@@ -107,53 +113,9 @@
         </tbody>
     </table>
     
-       <div id="TableTail">
-        <div id="TableTail_inside">
-            <a href="${pageContext.request.contextPath}/go.action?to=customer/add"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>
-        </div>
-    </div>
+
     
-    <%--<div class="ItemBlock_Title1" id="userTitle" style="display: none;">--%>
-	<%--<!-- 信息说明 --><div class="ItemBlock_Title1">--%>
-		        	<%--<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif"/>--%>
-		        	<%--<div id="userImage"></div>--%>
-    			   <%--</div>--%>
-    <%--<div class="ItemBlock_Title1" id="privilegeTitle" style="display: none;"><div class="ItemBlock_Title1">--%>
-        	<%--<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif" />选择角色</div> --%>
-        <%--</div>--%>
-        <%----%>
-        <%--<!-- 表单内容显示 -->--%>
-        <%--<div class="ItemBlockBorder" style="display: none;" id="privilegeContent">--%>
-            <%--<div class="ItemBlock">--%>
-                <%--<table cellpadding="0" cellspacing="0" class="mainForm">--%>
-					<%--<!--表头-->--%>
-					<%--<thead>--%>
-						<%--<tr align="LEFT" valign="MIDDLE" id="TableTitle">--%>
-							<%--<td width="300px" style="padding-left: 7px;">--%>
-								<%--<!-- 如果把全选元素的id指定为selectAll，并且有函数selectAll()，就会有错。因为有一种用法：可以直接用id引用元素 -->--%>
-								<%--<input type="checkbox" id="allchecked"/>--%>
-								<%--<label for="cbSelectAll">全选</label>--%>
-							<%--</td>--%>
-						<%--</tr>--%>
-					<%--</thead>--%>
-                   <%----%>
-			   		<%--<!--显示数据列表-->--%>
-					<%--<tbody id="TableData">--%>
-						<%--<tr class="TableDetail1">--%>
-							<%--<!-- 显示权限树 -->--%>
-							<%--<td>--%>
-								<%--<ul id='roleTree' class="tree"></ul>--%>
-								<%--<img id="loading" src="css/images/loading.gif">--%>
-							<%--</td>--%>
-						<%--</tr>--%>
-					<%--</tbody>--%>
-                <%--</table>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<!-- 表单操作 -->--%>
-        <%--<div id="InputDetailBar">--%>
-            <%--<image id="saveRole" src="${pageContext.request.contextPath}/style/images/save.png"/>--%>
-        <%--</div>--%>
+
 </div>
   </body>
 </html>

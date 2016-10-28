@@ -24,12 +24,22 @@
   <div id="Title_bar_Head"> 
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
-            <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/css/images/title_arrow.gif"/> 书刊管理
+            <tr>
+                <td>
+                    <img border="0" width="13" height="13" src="${pageContext.request.contextPath}/css/images/title_arrow.gif"/> 书刊管理
+                </td>
+            </tr>
         </div>
         <div id="Title_End"></div>
     </div>
 </div>
+
     <div id="MainArea">
+
+        <div id="TableTail">
+            <div id="TableTail_inside">
+                <a href="${pageContext.request.contextPath}/go.action?to=book/preAdd"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>
+            </div>
     <table cellspacing="0" cellpadding="0" class="TableStyle">
        
         <!-- 表头-->
@@ -100,10 +110,10 @@
         </tbody>
     </table>
     
-       <div id="TableTail">
-        <div id="TableTail_inside">
-            <a href="${pageContext.request.contextPath}/go.action?to=book/preAdd"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>
-        </div>
+       <%--<div id="TableTail">--%>
+        <%--<div id="TableTail_inside">--%>
+            <%--<a href="${pageContext.request.contextPath}/go.action?to=book/preAdd"><img src="${pageContext.request.contextPath}/css/images/createNew.png" /></a>--%>
+        <%--</div>--%>
     </div>
     
     <%--<div class="ItemBlock_Title1" id="userTitle" style="display: none;">--%>
