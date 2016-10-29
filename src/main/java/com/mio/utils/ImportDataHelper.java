@@ -8,7 +8,6 @@ import com.mio.service.BookService;
 import com.mio.service.CardService;
 import com.mio.service.CustomerService;
 import com.mio.service.PaymentService;
-import com.mio.service.impl.BookServiceImpl;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -20,6 +19,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by liuhe on 2016/10/28.
@@ -34,7 +35,8 @@ public class ImportDataHelper {
         int i;
         Sheet sheet;
         Workbook book;
-        Cell cell1,cell2,cell3,cell4,cell5,cell6;
+        Cell cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9;
+        HashMap<String, String> map = new HashMap<>();
         try {
             //t.xls为要读取的excel文件名
 
@@ -52,6 +54,9 @@ public class ImportDataHelper {
             ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
             BookService bookService = (BookService) ac.getBean("bookService");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+
             i=1;
             while(true)
             {
@@ -62,12 +67,33 @@ public class ImportDataHelper {
                 cell4=sheet.getCell(9,i);
                 cell5=sheet.getCell(11,i);
                 cell6=sheet.getCell(7,i);//作者
+                cell7=sheet.getCell(8,i);//出版社
+                cell8=sheet.getCell(29,i);//定价
 
 
                 Book book1 = new Book();
-                book1.setIsbn(cell3.getContents());
+
+                if (cell3.getContents()==null||"".equals(cell3.getContents())){
+                    i++;
+                    map.put(cell1.getContents(),cell2.getContents());
+                    continue;
+                }
+
+//                if (cell3.getContents().length()>12) {
+                    book1.setIsbn(cell3.getContents());
+//                }
+
+
+                //设置定价
+                if (cell8.getContents()!=null&&!"".equals(cell8.getContents())) {
+                    book1.setPrice(Double.parseDouble(cell8.getContents()));
+                }
+
                 book1 = HttpUtil.dangdangSearch(book1);
 
+                if (cell7.getContents()!=null){
+                    book1.setPublisher(cell7.getContents());
+                }
 
                 book1.setBookName(cell2.getContents());
                 book1.setStatus("0");//0:正常 1：丢失 2：损坏
@@ -92,10 +118,21 @@ public class ImportDataHelper {
                 System.out.println(cell1.getContents()+"\t"+cell2.getContents()+"\t"+cell3.getContents());
                 i++;
             }
+
+
+
+
             book.close();
         }
         catch(Exception e)  {
             e.printStackTrace();
+        }finally {
+            Iterator<String> iterator = map.keySet().iterator();
+
+            while (iterator.hasNext()){
+                String key = iterator.next();
+                System.out.println("编号："+key+"书名:"+map.get(key));
+            }
         }
     }
 
@@ -187,6 +224,37 @@ public class ImportDataHelper {
             e.printStackTrace();
         }
     }
+
+
+
+
+    @Test
+    public void te(){
+
+
+        A a = new A();
+        a.f1();
+        a.f2();
+    }
+
+}
+
+
+class A{
+    int aa = 0;
+
+
+
+    public void f1(){
+        aa = 1;
+    }
+
+    public void f2(){
+        System.out.println(aa);
+    }
+
+
+
 
 
 
