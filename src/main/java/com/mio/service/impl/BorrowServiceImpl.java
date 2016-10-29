@@ -124,4 +124,9 @@ public class BorrowServiceImpl implements BorrowService{
     public List<BorrowVO> findCustomerRanking() {
         return borrowVOMapper.findCustomerRanking();
     }
+
+    @Override
+    public BorrowVO findBorrowVOById(Integer id) {
+        return borrowVOMapper.findBorrowById(id);
+    }
 }

@@ -55,6 +55,20 @@ public class BorrowAction {
         modelAndView.setViewName("borrow/list");
         return modelAndView;
     }
+    @RequestMapping("findBorrowById")
+    public ModelAndView findBorrowById(Integer id){
+        ModelAndView modelAndView = new ModelAndView();
+
+        BorrowVO  borrow = borrowService.findBorrowVOById(id);
+
+        ArrayList<BorrowVO> borrowVOList = new ArrayList<>();
+        borrowVOList.add(borrow);
+
+        modelAndView.addObject("borrowVOList",borrowVOList);
+
+        modelAndView.setViewName("borrow/list_for_deduction");
+        return modelAndView;
+    }
     @RequestMapping("queryBorrow")
     public ModelAndView queryBorrow(Integer cardNumber,
                                         String customerName,

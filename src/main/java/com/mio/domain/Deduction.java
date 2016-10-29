@@ -9,6 +9,9 @@ public class Deduction {
 
     private Integer bookId;
 
+    private String customerName;//只是为了显示数据
+    private String bookName;//只是为了显示数据
+
     private String reason;
 
     private Double money;
@@ -71,5 +74,22 @@ public class Deduction {
 
     public void setBorrowId(Integer borrowId) {
         this.borrowId = borrowId;
+    }
+
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 }

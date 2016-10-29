@@ -20,4 +20,6 @@ public interface DeductionService {
     Deduction findDeductionById(Integer id);
 
     Double countMoney();
+
+    List<Deduction> findDeductionByCustomerId(Integer id);
 }

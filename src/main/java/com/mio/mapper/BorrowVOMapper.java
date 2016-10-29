@@ -1,5 +1,6 @@
 package com.mio.mapper;
 
+import com.mio.domain.Borrow;
 import com.mio.domain.BorrowVO;
 import com.mio.domain.QueryBorrowVO;
 
@@ -24,4 +25,6 @@ public interface BorrowVOMapper {
     List<BorrowVO> findCustomerRanking();
 
     List<BorrowVO> findAllBorrowByCondition(QueryBorrowVO queryBorrowVO);
+
+    BorrowVO findBorrowById(Integer id);
 }

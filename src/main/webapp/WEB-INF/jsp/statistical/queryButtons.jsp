@@ -95,6 +95,7 @@
 
                     </tr>
 
+
                 </table>
             </div>
         </div>
@@ -141,7 +142,7 @@
                             <input type="text" name="input" cssClass="InputStyle"/>
                         </td>
                         <td>
-                                <button cssClass="InputStyle">查询用户</button>
+                                <button cssClass="InputStyle">查询读者</button>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -157,6 +158,33 @@
         </div>
     </div>
 
+    <!-- 表单内容显示 -->
+    <div class="ItemBlockBorder">
+        <div class="ItemBlock">
+            <table cellpadding="0" cellspacing="0" class="mainForm">
+
+                <form action="/deductionAction/findUserDeduction.action" method="post">
+
+                    <tr>
+                        <td>
+                            <input type="text" name="input" cssClass="InputStyle"/>
+                        </td>
+                        <td>
+                            <button cssClass="InputStyle">查询读者扣费信息</button> （什么都不输入查询所有记录）
+                        </td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                    </tr>
+                </form>
+
+            </table>
+        </div>
+    </div>
 
 
         <%--<!-- 表单操作 -->--%>

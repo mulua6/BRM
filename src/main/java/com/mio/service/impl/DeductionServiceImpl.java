@@ -19,7 +19,7 @@ public class DeductionServiceImpl implements DeductionService{
 
     @Override
     public List<Deduction> findAllDeductions() {
-        return deductionMapper.selectByExample(new DeductionExample());
+        return deductionMapper.findAllDeductions();
     }
 
     @Override
@@ -45,6 +45,11 @@ public class DeductionServiceImpl implements DeductionService{
     @Override
     public Double countMoney() {
         return deductionMapper.countMoney();
+    }
+
+    @Override
+    public List<Deduction> findDeductionByCustomerId(Integer id) {
+        return deductionMapper.findDeductionByCustomerId(id);
     }
 
 

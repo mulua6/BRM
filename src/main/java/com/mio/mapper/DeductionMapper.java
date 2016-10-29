@@ -29,4 +29,8 @@ public interface DeductionMapper {
     int updateByPrimaryKey(Deduction record);
 
     Double countMoney();
+
+    List<Deduction> findAllDeductions();
+
+    List<Deduction> findDeductionByCustomerId(Integer id);
 }

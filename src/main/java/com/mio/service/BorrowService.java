@@ -48,4 +48,6 @@ public interface BorrowService {
     List<BorrowVO> findBookRanking();
 
     List<BorrowVO> findCustomerRanking();
+
+    BorrowVO findBorrowVOById(Integer id);
 }
