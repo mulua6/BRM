@@ -75,6 +75,10 @@ public class CustomerAction {
     public ModelAndView findCustomerByInput(HttpServletRequest request,String input){
         ModelAndView modelAndView = new ModelAndView();
 
+        if (input.startsWith("0")){
+            input = input.substring(1);
+        }
+
         List<Customer> customerList = customerService.findCustomerByInput(input);
 
         modelAndView.addObject("customerList",customerList);

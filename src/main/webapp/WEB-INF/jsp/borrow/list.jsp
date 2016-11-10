@@ -73,8 +73,17 @@
                         <c:if test="${borrowVO.backTime == null}">
                             <a href="${pageContext.request.contextPath}/borrowAction/backBorrow.action?id=${borrowVO.id}">还书</a> |
                             <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">续借</a> |
-                            <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">丢失</a> |
-                            <a href="${pageContext.request.contextPath}/borrowAction/renewBorrow.action?id=${borrowVO.id}">破损</a>
+                            <a href="${pageContext.request.contextPath}/borrowAction/preLostBorrow.action?id=${borrowVO.id}
+                            &cardNumber=${borrowVO.cardNumber}
+                            &customerName=${borrowVO.customerName}
+                            &isbn=${borrowVO.isbn}
+                            &op=0">丢失</a> |
+
+                            <a href="${pageContext.request.contextPath}/borrowAction/preLostBorrow.action?id=${borrowVO.id}
+                            &cardNumber=${borrowVO.cardNumber}
+                            &customerName=${borrowVO.customerName}
+                            &isbn=${borrowVO.isbn}
+                            &op=1">破损</a>
                         </c:if>
 
                     </td>
@@ -96,7 +105,7 @@
     
        <div id="TableTail">
         <div id="TableTail_inside">
-        <a href="${pageContext.request.contextPath}/borrowAction/queryBorrow.action?list=all"><button  cssClass="InputStyle">显示全部借书记录</button></a>
+        <a href="${pageContext.request.contextPath}/borrowAction/queryBorrow.action?list=all&cardNumber=${cardNumber}"><button  cssClass="InputStyle">显示全部借书记录</button></a>
         </div>
     </div>
     

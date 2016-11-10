@@ -105,6 +105,7 @@ public class BorrowAction {
 
 
             modelAndView.addObject("borrowVOList",borrowVOList);
+            modelAndView.addObject("cardNumber",cardNumber);
 
             modelAndView.setViewName("borrow/list");
             return modelAndView;
