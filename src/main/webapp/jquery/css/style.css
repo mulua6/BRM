@@ -1,0 +1,41 @@
+div{
+    width:340px;
+    height:340px;
+    margin:5px;
+    background:#aaa;
+	border:#000 1px solid;
+    float:left;
+    font-size:17px;
+    font-family:Verdana;
+  }
+
+  div.mini{ 
+    width:55px;
+    height:55px;
+    background-color:#aaa;
+    font-size:12px;
+  }
+ 
+  div.hide { 
+    display:none;
+  }
+  
+  div.open{ 
+  
+    background-color:white;
+    font-size:12px;
+  }
+  
+  div.close{ 
+    
+    background-color:black;
+    font-size:12px;
+  }
+  
+   div.cc{ 
+    
+    background-color:red;
+    font-size:12px;
+  }
+  
+  
