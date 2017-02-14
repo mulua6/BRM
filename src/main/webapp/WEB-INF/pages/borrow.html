@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>欢迎使用***图书借阅系统</title>
+	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../css/demo.css">
+
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+
+
+	<script type="text/javascript" >
+
+	</script>
+
+
+
+</head>
+<body>
+
+<div data-options="region:'south',split:true" title="欢迎使用" style="height: 100px">
+
+    <div title="借阅列表" style="padding:10px;border-style: solid;border-color: #a2b5d6;border-width: 1px;margin: 10px">
+
+        <form id="borrowConditionForm" method="post" style="margin: 20px" class="easyui-form">
+
+            <div>
+                <div>
+                    <label for="name">读者卡号:</label>
+                    <input class="easyui-validatebox" type="text" name="itemid"  />
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                    <label for="name">书&nbsp;&nbsp;&nbsp;名:</label>
+                    <input class="easyui-validatebox" type="text" name="itemid"  />
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin:3px;" onclick="">添加</a>
+
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+<div data-options="region:'north',split:true" title="欢迎使用" style="">
+	<div title="借阅列表" style="padding:10px">
+
+		<table id="bookList" class="easyui-datagrid"
+               data-options="url:'datagrid_data1.json',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#borrow_tb'">
+			<thead>
+			<tr>
+				<th data-options="field:'itemid',align:'center'" width="80">图书ID</th>
+				<th data-options="field:'productid',align:'center'" width="100">书名</th>
+				<th data-options="field:'listprice',align:'center'" width="80">图书价格</th>
+				<!--<th data-options="field:'unitcost',align:'center'" width="80">数量</th>-->
+				<th data-options="field:'attr1',align:'center'" width="150">作者</th>
+				<th data-options="field:'status',align:'center'" width="50">状态</th>
+			</tr>
+			</thead>
+		</table>
+
+
+	</div>
+
+</div>
+
+
+
+
+
+
+	<!--borrow toolbar-->
+	<div id="borrow_tb">
+		<!--<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin:3px;" onclick="bookReturn()">还书</a>-->
+		<!--<a class="easyui-linkbutton" data-options="iconCls:'icon-edit'" style="margin:3px;" onclick="bookEdit()">修改</a>-->
+		<!--<a class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="margin:3px;" onclick="bookDelete()">删除</a>-->
+	</div>
+
+	<!--toolbar for add book-->
+	<div id="book_add_bt" style="display: none">
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin:3px;">添加</a>
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="margin:3px;" onclick="closeWin('bookAdd')">取消</a>
+	</div>
+
+	<!--toolbar for edit book-->
+	<div id="book_edit_bt" style="display: none">
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin:3px;">修改</a>
+		<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="margin:3px;" onclick="closeWin('bookEdit')">取消</a>
+	</div>
+
+
+	<!--add-->
+	<div id="bookAdd" style="display: none;text-align: center" >
+
+		<form id="bookAddForm" method="post" style="margin: 20px">
+			<div>
+				<label for="name">书名:</label>
+				<input class="easyui-validatebox" type="text" name="bookName" data-options="required:true" />
+			</div>
+			<div>
+				<label for="email">作者:</label>
+				<input class="easyui-validatebox" type="text" name="author" data-options="required:true" />
+			</div>
+			<div>
+				<label for="email">价格:</label>
+				<input class="easyui-validatebox" type="text" name="price" data-options="required:true" />
+			</div>
+		</form>
+	</div>
+
+
+	<!--edit-->
+	<div id="bookEdit" style="display: none;text-align: center" >
+
+		<form id="bookEditForm" method="post" style="margin: 20px" class="easyui-form">
+			<div>
+				<label for="name">书名:</label>
+				<input class="easyui-validatebox" type="text" name="itemid" data-options="required:true" />
+			</div>
+			<div>
+				<label for="email">作者:</label>
+				<input class="easyui-validatebox" type="text" name="attr1" data-options="required:true" />
+			</div>
+			<div>
+				<label for="email">价格:</label>
+				<input class="easyui-validatebox" type="text" name="status" data-options="required:true" />
+			</div>
+		</form>
+	</div>
+
+
+</body>
+</html>
