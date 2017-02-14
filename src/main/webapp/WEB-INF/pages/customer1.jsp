@@ -1,14 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>欢迎使用***图书借阅系统</title>
-	<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="../themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="../css/demo.css">
-
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 
 
 	<script type="text/javascript" >
@@ -23,11 +17,11 @@
 	<div title="读者列表" style="padding:10px">
 
 		<table id="bookList" class="easyui-datagrid"
-			   data-options="url:'datagrid_data1.json',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#reader_tb'">
+			   data-options="url:'/customerAction/findAllCustomersAsJson.action',fitColumns:true,singleSelect:true,pagination:true,toolbar:'#reader_tb'">
 			<thead>
 			<tr>
-				<th data-options="field:'itemid',align:'center'" width="80">读者ID</th>
-				<th data-options="field:'productid',align:'center'" width="100">姓名</th>
+				<th data-options="field:'number',align:'center'" width="80">读者ID</th>
+				<th data-options="field:'customerName',align:'center'" width="100">姓名</th>
 				<!--<th data-options="field:'listprice',align:'center'" width="80">图书价格</th>-->
 				<!--<th data-options="field:'unitcost',align:'center'" width="80">数量</th>-->
 				<!--<th data-options="field:'attr1',align:'center'" width="150">作者</th>-->

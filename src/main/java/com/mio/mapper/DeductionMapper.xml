@@ -246,5 +246,14 @@
   <select id="countMoney"  resultType="double">
     SELECT sum(money) moneySum FROM deduction;
   </select>
+  <select id="findDeductionByCustomerId"  resultType="double">
+    SELECT sum(money) moneySum FROM deduction;
+  </select>
+  <select id="findAllDeductions"  resultMap="BaseResultMap">
+    SELECT a.id, a.customer_id, a.book_id, a.reason, a.money, a.create_time, a.borrow_id,b.customer_name as customerName,b.number,c.book_name as bookName,c.isbn
+
+    FROM deduction a,customer b,book c
+    WHERE a.customer_id = b.id AND a.book_id = c.id
+  </select>
 
 </mapper>

@@ -125,3 +125,26 @@ function bookReturn() {
 function closeWin(dialogName) {
    $("#"+dialogName).dialog("close");
 }
+
+
+
+//修改前判断是否有选中的行数据
+function getSelected(listNameId) {
+
+    var selected = $("#"+listNameId).datagrid("getSelected");
+
+    if(selected==null){
+        $.messager.alert("提示","请选择要编辑的选项","error");
+        return undefined;
+    }else {
+        return selected;
+    }
+
+}
+
+//重新加载datagrid的数据
+function reloadList(listNameId) {
+    $("#"+listNameId).datagrid("reload");
+}
+
+

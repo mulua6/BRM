@@ -1,6 +1,9 @@
 package com.mio.domain;
 
+import com.mio.utils.DataDictUtils;
+import com.mio.utils.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
+import sun.nio.cs.ext.TIS_620;
 
 import java.util.Date;
 
@@ -12,6 +15,7 @@ public class Book {
     private Integer number;
 
     private String status;//0:正常 1：丢失 2：损坏 3：外借
+    private String statusView;//0:正常 1：丢失 2：损坏 3：外借
 
     private String other;
 
@@ -44,11 +48,13 @@ public class Book {
     private Integer roomId;
 
     private Integer shelfId;
+    private String shelfName;
 
     private String location;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date publishTime;
+    private String publishTimeView;
 
     private Double price;
 
@@ -86,6 +92,7 @@ public class Book {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+        this.statusView = DataDictUtils.parseBookStatus(Integer.parseInt(status));
     }
 
     public String getOther() {
@@ -230,6 +237,7 @@ public class Book {
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
+        this.publishTimeView = DateUtils.formatDate(publishTime);
     }
 
     public Double getPrice() {
@@ -254,5 +262,61 @@ public class Book {
 
     public void setLink(String link) {
         this.link = link == null ? null : link.trim();
+    }
+
+    public String getStatusView() {
+        return statusView;
+    }
+
+    public void setStatusView(String statusView) {
+        this.statusView = statusView;
+    }
+
+    public String getShelfName() {
+        return shelfName;
+    }
+
+    public void setShelfName(String shelfName) {
+        this.shelfName = shelfName;
+    }
+
+    public String getPublishTimeView() {
+        return publishTimeView;
+    }
+
+    public void setPublishTimeView(String publishTimeView) {
+        this.publishTimeView = publishTimeView;
+        this.publishTime = DateUtils.parseString(publishTimeView);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", bookName='" + bookName + '\'' +
+                ", number=" + number +
+                ", status='" + status + '\'' +
+                ", other='" + other + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", code='" + code + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", revision='" + revision + '\'' +
+                ", packaging='" + packaging + '\'' +
+                ", size='" + size + '\'' +
+                ", wcount=" + wcount +
+                ", paper='" + paper + '\'' +
+                ", pcount=" + pcount +
+                ", suiteNumber=" + suiteNumber +
+                ", attachment='" + attachment + '\'' +
+                ", attachmentNumber=" + attachmentNumber +
+                ", roomId=" + roomId +
+                ", shelfId=" + shelfId +
+                ", location='" + location + '\'' +
+                ", publishTime=" + publishTime +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

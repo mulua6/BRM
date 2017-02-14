@@ -13,7 +13,7 @@ public interface DeductionService {
 
     void addDeduction(Deduction deduction);
 
-    void deleteDeduction(Integer id);
+    void deleteDeduction(Deduction deduction);
 
     void updateDeduction(Deduction deduction);
 

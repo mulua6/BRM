@@ -14,6 +14,7 @@ public class QueryBorrowVO {
     public Integer bookId;
     public Date startTime;
     public Date endTime;
+    public String history;
 
     public String getCustomerName() {
         return customerName;
@@ -53,5 +54,13 @@ public class QueryBorrowVO {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
     }
 }

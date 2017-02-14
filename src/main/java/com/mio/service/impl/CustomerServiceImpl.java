@@ -14,14 +14,14 @@ import java.util.List;
  * Created by liuhe on 2016/10/14.
  * update
  */
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService, com.mio.service.impl.CustomerService {
 
     @Autowired
     public CustomerMapper customerMapper;
 
     @Override
     public List<Customer> findAllCustomers() {
-        return customerMapper.selectByExample(new CustomerExample());
+        return customerMapper.selectAllCustomersVo();
     }
 
     @Override
@@ -36,7 +36,24 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void updateCustomer(Customer customer) {
-//        customerMapper.updateByExample(customer,new CustomerExample());
+
+        Customer old = customerMapper.selectByPrimaryKey(customer.getId());
+        customer.setBirthday(old.getBirthday());
+//        customer.setDeposit(old.getDeposit());
+        customer.setCreateTime(old.getCreateTime());
+//        customer.setExpireTime(old.getExpireTime());
+
+        customerMapper.updateByPrimaryKey(customer);
+    }
+
+    @Override
+    public void updateCustomerExpireTime(Customer customer) {
+
+        Customer old = customerMapper.selectByPrimaryKey(customer.getId());
+        customer.setBirthday(old.getBirthday());
+        customer.setDeposit(old.getDeposit());
+        customer.setCreateTime(old.getCreateTime());
+
         customerMapper.updateByPrimaryKey(customer);
     }
 
@@ -72,6 +89,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<Customer> findCustomerByInput(String input) {
+        System.out.println(input+"service");
         return customerMapper.findCustomerByInput(input);
     }
 

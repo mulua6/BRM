@@ -32,4 +32,6 @@ public interface PaymentMapper {
 
 
     PaymentVO countAllPayment();
+
+    List<Payment> selectAllPayments();
 }

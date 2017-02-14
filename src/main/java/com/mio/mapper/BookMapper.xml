@@ -91,6 +91,18 @@
     size, wcount, paper, pcount, suite_number, attachment, attachment_number, room_id, 
     shelf_id, location, publish_time, price, image, link
   </sql>
+  <sql id="ex_Column_List" >
+    a.id, a.book_name, a.number, a.status, a.other, a.isbn, a.code, a.author, a.publisher, a.revision, a.packaging,
+    a.size, a.wcount, a.paper, a.pcount, a.suite_number, a.attachment, a.attachment_number, a.room_id,
+    a.shelf_id, a.location, a.publish_time, a.price, a.image, a.link ,b.shelf_name as shelfName
+  </sql>
+  <select id="findAllBooksVo" resultMap="BaseResultMap"  >
+    select
+    <include refid="ex_Column_List" />
+    from book a left join shelf b
+    on a.shelf_id = b.id
+
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mio.domain.BookExample" >
     select
     <if test="distinct" >
@@ -122,24 +134,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mio.domain.Book" >
-    insert into book (id, book_name, number, 
-      status, other, isbn, 
-      code, author, publisher, 
-      revision, packaging, size, 
-      wcount, paper, pcount, 
-      suite_number, attachment, attachment_number, 
-      room_id, shelf_id, location, 
-      publish_time, price, image, 
-      link)
-    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{status,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR}, 
-      #{revision,jdbcType=VARCHAR}, #{packaging,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, 
-      #{wcount,jdbcType=INTEGER}, #{paper,jdbcType=VARCHAR}, #{pcount,jdbcType=INTEGER}, 
-      #{suiteNumber,jdbcType=INTEGER}, #{attachment,jdbcType=VARCHAR}, #{attachmentNumber,jdbcType=INTEGER}, 
-      #{roomId,jdbcType=INTEGER}, #{shelfId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
-      #{publishTime,jdbcType=DATE}, #{price,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR}, 
-      #{link,jdbcType=VARCHAR})
+    insert into book (id, book_name, number,
+    status, other, isbn,
+    code, author, publisher,
+    revision, packaging, size,
+    wcount, paper, pcount,
+    suite_number, attachment, attachment_number,
+    room_id, shelf_id, location,
+    publish_time, price, image,
+    link)
+    values (#{id,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER},
+    #{status,jdbcType=VARCHAR}, #{other,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR},
+    #{code,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{publisher,jdbcType=VARCHAR},
+    #{revision,jdbcType=VARCHAR}, #{packaging,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR},
+    #{wcount,jdbcType=INTEGER}, #{paper,jdbcType=VARCHAR}, #{pcount,jdbcType=INTEGER},
+    #{suiteNumber,jdbcType=INTEGER}, #{attachment,jdbcType=VARCHAR}, #{attachmentNumber,jdbcType=INTEGER},
+    #{roomId,jdbcType=INTEGER}, #{shelfId,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR},
+    #{publishTime,jdbcType=DATE}, #{price,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR},
+    #{link,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mio.domain.Book" >
     insert into book
@@ -499,34 +511,34 @@
   <update id="updateByPrimaryKey" parameterType="com.mio.domain.Book" >
     update book
     set book_name = #{bookName,jdbcType=VARCHAR},
-      number = #{number,jdbcType=INTEGER},
-      status = #{status,jdbcType=VARCHAR},
-      other = #{other,jdbcType=VARCHAR},
-      isbn = #{isbn,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      publisher = #{publisher,jdbcType=VARCHAR},
-      revision = #{revision,jdbcType=VARCHAR},
-      packaging = #{packaging,jdbcType=VARCHAR},
-      size = #{size,jdbcType=VARCHAR},
-      wcount = #{wcount,jdbcType=INTEGER},
-      paper = #{paper,jdbcType=VARCHAR},
-      pcount = #{pcount,jdbcType=INTEGER},
-      suite_number = #{suiteNumber,jdbcType=INTEGER},
-      attachment = #{attachment,jdbcType=VARCHAR},
-      attachment_number = #{attachmentNumber,jdbcType=INTEGER},
-      room_id = #{roomId,jdbcType=INTEGER},
-      shelf_id = #{shelfId,jdbcType=INTEGER},
-      location = #{location,jdbcType=VARCHAR},
-      publish_time = #{publishTime,jdbcType=DATE},
-      price = #{price,jdbcType=DOUBLE},
-      image = #{image,jdbcType=VARCHAR},
-      link = #{link,jdbcType=VARCHAR}
+    number = #{number,jdbcType=INTEGER},
+    status = #{status,jdbcType=VARCHAR},
+    other = #{other,jdbcType=VARCHAR},
+    isbn = #{isbn,jdbcType=VARCHAR},
+    code = #{code,jdbcType=VARCHAR},
+    author = #{author,jdbcType=VARCHAR},
+    publisher = #{publisher,jdbcType=VARCHAR},
+    revision = #{revision,jdbcType=VARCHAR},
+    packaging = #{packaging,jdbcType=VARCHAR},
+    size = #{size,jdbcType=VARCHAR},
+    wcount = #{wcount,jdbcType=INTEGER},
+    paper = #{paper,jdbcType=VARCHAR},
+    pcount = #{pcount,jdbcType=INTEGER},
+    suite_number = #{suiteNumber,jdbcType=INTEGER},
+    attachment = #{attachment,jdbcType=VARCHAR},
+    attachment_number = #{attachmentNumber,jdbcType=INTEGER},
+    room_id = #{roomId,jdbcType=INTEGER},
+    shelf_id = #{shelfId,jdbcType=INTEGER},
+    location = #{location,jdbcType=VARCHAR},
+    publish_time = #{publishTime,jdbcType=DATE},
+    price = #{price,jdbcType=DOUBLE},
+    image = #{image,jdbcType=VARCHAR},
+    link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <select id="findBookByInput"  resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List"></include>  FROM book
-    WHERE book.book_name LIKE #{input} OR book.author LIKE #{input} OR book.isbn LIKE #{input}
+    SELECT <include refid="ex_Column_List"></include>  FROM book a left join shelf b on a.shelf_id = b.id
+    WHERE a.book_name LIKE #{input} OR a.author LIKE #{input} OR a.isbn LIKE #{input}
   </select>
 </mapper>

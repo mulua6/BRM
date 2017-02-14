@@ -18,6 +18,8 @@ public interface CustomerService {
 
     void updateCustomer(Customer customer);
 
+    void updateCustomerExpireTime(Customer customer);
+
     Customer findCustomerById(Integer id);
     Customer findCustomerByCardNumber(Integer cardNumber);
 

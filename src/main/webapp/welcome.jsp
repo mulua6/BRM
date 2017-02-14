@@ -11,6 +11,13 @@
 	<script language="javascript" src="${pageContext.request.contextPath}/style/js/DataShowManager.js" charset="utf-8"></script>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/pageCommon.css" />
     <script type="text/javascript">
+        
+        
+        function teee() {
+            $.post("http://localhost:8080/bookAction/findAllBooksAsJson.action",{},function (data) {
+                alert(data);
+            })
+        }
     </script>
 
 
@@ -23,6 +30,7 @@
         <div id="Title_Head"></div>
         <div id="Title"><!--页面标题-->
             欢迎使用
+            <button onclick="teee()">测试</button>
         </div>
         <div id="Title_End"></div>
     </div>

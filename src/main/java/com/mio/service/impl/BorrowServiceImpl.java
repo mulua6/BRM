@@ -93,12 +93,19 @@ public class BorrowServiceImpl implements BorrowService{
     }
 
     @Override
-    public List<Borrow> checkIfBorrowed(Integer customerId, Integer bookId) {
+    public List<BorrowVO> checkIfBorrowed(Integer customerId, Integer bookId) {
 
-        BorrowExample borrowExample = new BorrowExample();
-        borrowExample.createCriteria().andCustomerIdEqualTo(customerId).andBookIdEqualTo(bookId);
+//        BorrowExample borrowExample = new BorrowExample();
+//        borrowExample.createCriteria().andCustomerIdEqualTo(customerId).andBookIdEqualTo(bookId);
+//
+//        return borrowMapper.selectByExample(borrowExample);
 
-        return borrowMapper.selectByExample(borrowExample);
+
+        QueryBorrowVO queryBorrowVO = new QueryBorrowVO();
+        queryBorrowVO.setCustomerId(customerId);
+        queryBorrowVO.setBookId(bookId);
+
+        return  borrowVOMapper.findBorrowByCondition(queryBorrowVO);
     }
 
     @Override
@@ -128,5 +135,14 @@ public class BorrowServiceImpl implements BorrowService{
     @Override
     public BorrowVO findBorrowVOById(Integer id) {
         return borrowVOMapper.findBorrowById(id);
+    }
+
+    @Override
+    public List<BorrowVO> findBorrowByCustomer(Integer customerId,String history) {
+        QueryBorrowVO queryBorrowVO = new QueryBorrowVO();
+        queryBorrowVO.setCustomerId(customerId);
+        queryBorrowVO.setHistory(history);
+
+        return  borrowVOMapper.findBorrowByCondition(queryBorrowVO);
     }
 }

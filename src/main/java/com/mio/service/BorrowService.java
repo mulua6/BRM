@@ -36,7 +36,7 @@ public interface BorrowService {
      * @param bookId
      * @return
      */
-    List<Borrow> checkIfBorrowed(Integer customerId, Integer bookId);
+    List<BorrowVO> checkIfBorrowed(Integer customerId, Integer bookId);
 
     /**
      * 判断该用户持有的书是否达到上限
@@ -50,4 +50,12 @@ public interface BorrowService {
     List<BorrowVO> findCustomerRanking();
 
     BorrowVO findBorrowVOById(Integer id);
+
+    /**
+     * 根据读者查询该读者借出并且没有归还的书
+     * @param customerId
+     * @param history 0:只查询没有归还的，1：所有的借书记录
+     * @return
+     */
+    List<BorrowVO> findBorrowByCustomer(Integer customerId,String history);
 }

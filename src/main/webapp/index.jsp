@@ -1,5 +1,6 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html>
 <body>
-<h2>Hello World!------liuhe</h2>
+<jsp:forward page="WEB-INF/pages/main.jsp"></jsp:forward>
 </body>
 </html>

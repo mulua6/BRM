@@ -20,8 +20,8 @@ import java.util.List;
 @RequestMapping("/")
 public class LoginAction {
 
-    @Autowired
-    UserService userService;
+        @Autowired
+        UserService userService;
 
     @Autowired
     CardService cardService;

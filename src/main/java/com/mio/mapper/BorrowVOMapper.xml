@@ -64,7 +64,9 @@
                 AND borrow.borrow_time BETWEEN #{startTime} AND #{endTime}
             </if>
 
-            AND borrow.back_time is NULL
+            <if test="history == 0">
+                AND borrow.back_time IS NULL
+            </if>
         </where>
 
         ORDER BY borrow.borrow_time DESC ;
@@ -84,8 +86,24 @@
             <if test="startTime != null">
                 AND borrow.borrow_time BETWEEN #{startTime} AND #{endTime}
             </if>
+            <if test="history == '0'">
+                AND borrow.back_time IS NULL
+            </if>
 
         </where>
+        ORDER BY borrow.borrow_time DESC ;
+    </select>
+    <select id="findAllBorrowByCustomer" parameterType="com.mio.domain.QueryBorrowVO" resultType="com.mio.domain.BorrowVO">
+        <include refid="all"></include>
+
+        <where>
+            book.id=borrow.book_id AND borrow.customer_id=customer.id
+            <if test="customerId != null">
+                AND customer.id=#{customerId}
+            </if>
+
+        </where>
+        AND borrow.back_time IS NULL
         ORDER BY borrow.borrow_time DESC ;
     </select>
     <select id="findExpireBorrow" parameterType="int" resultType="com.mio.domain.BorrowVO">

@@ -27,14 +27,14 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public List<Payment> findAllPayments() {
-        return paymentMapper.selectByExample(new PaymentExample());
+        return paymentMapper.selectAllPayments();
     }
 
     @Override
     public void addPayment(Payment payment) {
 
         Customer customer = customerService.findCustomerById(payment.getCustomerId());
-        if (payment.getMoney()!=null){
+        if (payment.getMoney()!=0){
             payment.setReason("缴纳套餐费");
 
             //TODO 判断续费金额是否等于套餐费2.0
@@ -52,7 +52,7 @@ public class PaymentServiceImpl implements PaymentService{
 
         }
 
-        if (payment.getDeposit()!= null){
+        if (payment.getDeposit()!= 0){
             payment.setReason("补交押金");
 
             //修改读者押金

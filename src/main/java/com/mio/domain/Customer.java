@@ -1,6 +1,9 @@
 package com.mio.domain;
 
+import com.mio.utils.DataDictUtils;
+import com.mio.utils.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.DateFormatter;
 
 import java.util.Date;
 
@@ -14,6 +17,7 @@ public class Customer {
     private String phone;
 
     private Integer sex;
+    private String sexView;
 
     /**
      * 0:正常
@@ -21,6 +25,7 @@ public class Customer {
      * 2:逾期
      */
     private String status;
+    private String statusView;
 
     private String address;
 
@@ -28,19 +33,23 @@ public class Customer {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createTime;
+    private String createTimeView;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updateTime;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date expireTime;
+    private String expireTimeView;
 
     private Integer count;
 
     private Integer cardId;
+    private String cardName;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthday;
+    private String birthdayView;
 
     private Double deposit;
 
@@ -82,6 +91,7 @@ public class Customer {
 
     public void setSex(Integer sex) {
         this.sex = sex;
+        this.sexView = DataDictUtils.parseSex(sex);
     }
 
     public String getStatus() {
@@ -90,6 +100,7 @@ public class Customer {
 
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+        this.statusView = status == null ? null : DataDictUtils.parseCustomerStatus(Integer.parseInt(status));
     }
 
     public String getAddress() {
@@ -114,6 +125,9 @@ public class Customer {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+
+        this.createTimeView = DateUtils.formatDate(createTime);
+
     }
 
     public Date getUpdateTime() {
@@ -130,6 +144,7 @@ public class Customer {
 
     public void setExpireTime(Date expireTime) {
         this.expireTime = expireTime;
+        this.expireTimeView = DateUtils.formatDate(expireTime);
     }
 
     public Integer getCount() {
@@ -154,6 +169,7 @@ public class Customer {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+        this.birthdayView = DateUtils.formatDate(birthday);
     }
 
     public Double getDeposit() {
@@ -162,5 +178,53 @@ public class Customer {
 
     public void setDeposit(Double deposit) {
         this.deposit = deposit;
+    }
+
+    public String getCreateTimeView() {
+        return createTimeView;
+    }
+
+    public void setCreateTimeView(String createTimeView) {
+        this.createTimeView = createTimeView;
+    }
+
+    public String getExpireTimeView() {
+        return expireTimeView;
+    }
+
+    public void setExpireTimeView(String expireTimeView) {
+        this.expireTimeView = expireTimeView;
+    }
+
+    public String getBirthdayView() {
+        return birthdayView;
+    }
+
+    public void setBirthdayView(String birthdayView) {
+        this.birthdayView = birthdayView;
+    }
+
+    public String getSexView() {
+        return sexView;
+    }
+
+    public void setSexView(String sexView) {
+        this.sexView = sexView;
+    }
+
+    public String getStatusView() {
+        return statusView;
+    }
+
+    public void setStatusView(String statusView) {
+        this.statusView = statusView;
+    }
+
+    public String getCardName() {
+        return cardName;
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 }

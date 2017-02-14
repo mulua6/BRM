@@ -10,7 +10,9 @@ public class Deduction {
     private Integer bookId;
 
     private String customerName;//只是为了显示数据
+    private String number;//只是为了显示数据 用户卡号
     private String bookName;//只是为了显示数据
+    private String isbn;//只是为了显示数据
 
     private String reason;
 
@@ -91,5 +93,21 @@ public class Deduction {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }

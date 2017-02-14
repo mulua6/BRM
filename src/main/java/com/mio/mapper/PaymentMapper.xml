@@ -245,4 +245,10 @@
     SELECT sum(p.money) moneySum,sum(p.deposit) depositSum ,sum(money+deposit) totalSum FROM payment p;
   </select>
 
+  <select id="selectAllPayments"  resultMap="BaseResultMap">
+    SELECT a.id, a.customer_id, a.money, a.deposit, a.time, a.reason, a.other,b.customer_name as customerName,b.number
+     FROM payment a,customer b
+     WHERE  a.customer_id = b.id
+  </select>
+
 </mapper>

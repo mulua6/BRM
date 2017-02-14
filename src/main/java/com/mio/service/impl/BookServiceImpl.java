@@ -19,7 +19,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> findAllBooks() {
-        return bookMapper.selectByExample(new BookExample());
+        return bookMapper.findAllBooksVo();
     }
 
     @Override

@@ -168,7 +168,7 @@ public class HttpUtil {
 
         Document firstResult = Jsoup.parse(doc.getElementsByClass("line1").toString());
 
-
+        System.out.println(firstResult);
         String attr = findAttr(firstResult, "search_pre_price");
 //        String attr = findAttr(firstResult, "search_now_price");
         if (attr!=null){
@@ -191,11 +191,11 @@ public class HttpUtil {
             String[] split = search_book_author.split("/");
             book.setAuthor(split[0]);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            try {
-//                book.setPublishTime(sdf.parse(split[1].trim()));
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                book.setPublishTime(sdf.parse(split[1].trim()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             if (split.length>3){
                 book.setPublisher(split[2]);

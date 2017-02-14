@@ -8,6 +8,8 @@ public class Payment {
     private Integer id;
 
     private Integer customerId;
+    private String customerName;
+    private String number;
 
     private Double money;
 
@@ -74,5 +76,21 @@ public class Payment {
 
     public void setOther(String other) {
         this.other = other == null ? null : other.trim();
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

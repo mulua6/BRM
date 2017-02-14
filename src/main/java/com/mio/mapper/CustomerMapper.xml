@@ -15,6 +15,7 @@
         <result column="expire_time" property="expireTime" jdbcType="DATE" />
         <result column="count" property="count" jdbcType="INTEGER" />
         <result column="card_id" property="cardId" jdbcType="INTEGER" />
+        <result column="card_name" property="cardName" jdbcType="VARCHAR" />
         <result column="birthday" property="birthday" jdbcType="DATE" />
         <result column="deposit" property="deposit" jdbcType="DOUBLE" />
     </resultMap>
@@ -80,6 +81,10 @@
         id, customer_name, number, phone, sex, status, address, other, create_time, update_time,
         expire_time, count, card_id, birthday, deposit
     </sql>
+    <sql id="ex_Column_List" >
+        a.id, a.customer_name, a.number, a.phone, a.sex, a.status, a.address, a.other, a.create_time, a.update_time,
+        a.expire_time, a.count, a.card_id,b.card_name as card_name, a.birthday, a.deposit
+    </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mio.domain.CustomerExample" >
         select
         <if test="distinct" >
@@ -93,6 +98,13 @@
         <if test="orderByClause != null" >
             order by ${orderByClause}
         </if>
+    </select>
+    <select id="selectAllCustomersVo" resultMap="BaseResultMap"  >
+        select
+
+        <include refid="ex_Column_List" />
+        from customer a,card b
+        WHERE a.card_id = b.id
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
@@ -377,7 +389,11 @@
         select count(id) number, card_id cardId from customer group by card_id;
     </select>
     <select id="findCustomerByInput"  resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"></include>  FROM customer
-        WHERE customer.customer_name = #{input} or customer.number = #{input}
+        select
+
+        <include refid="ex_Column_List" />
+        from customer a ,card b
+        WHERE a.card_id = b.id
+        AND a.customer_name = #{input} or a.number = #{input}
     </select>
 </mapper>

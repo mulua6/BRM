@@ -1,5 +1,7 @@
 package com.mio.action;
 
+import com.alibaba.fastjson.JSONObject;
+import com.beust.jcommander.internal.Maps;
 import com.mio.domain.*;
 import com.mio.service.BookService;
 import com.mio.service.BorrowService;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liuhe on 16/10/11.
@@ -54,6 +57,22 @@ public class BorrowAction {
 
         modelAndView.setViewName("borrow/list");
         return modelAndView;
+    }
+
+
+    /**
+     * 查询所有的借出未还的图书
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "ajaxFindAllBorrows",produces = { "application/json;charset=UTF-8" })
+    public String ajaxFindAllBorrows() {
+        Map<Object, Object> result = Maps.newHashMap();
+        List<Borrow> borrowList = borrowService.findAllBorrows();
+
+        result.put("rows", borrowList);
+        return JSONObject.toJSONString(result);
+
     }
     @RequestMapping("findBorrowById")
     public ModelAndView findBorrowById(Integer id){
@@ -110,6 +129,40 @@ public class BorrowAction {
             modelAndView.setViewName("borrow/list");
             return modelAndView;
         }
+
+
+    @ResponseBody
+    @RequestMapping(value = "queryBorrowAsJson",produces = { "application/json;charset=UTF-8" })
+    public String queryBorrowAsJson(Integer cardNumber,
+                                    String customerName,
+                                    String isbn,
+                                    @DateTimeFormat(pattern="yyyy-MM-dd")Date startTime,
+                                    @DateTimeFormat(pattern="yyyy-MM-dd")Date endTime,
+                                    String list,
+                                    String history
+                                    ){
+        Map<Object, Object> result = Maps.newHashMap();
+
+        Customer customer = new Customer();
+        Book book = new Book();
+
+        if(cardNumber!=null){
+            customer = customerService.findCustomerByCardNumber(cardNumber);
+
+            if (customer==null){
+                result.put("msg","不存在该用户，请确认!");
+                return JSONObject.toJSONString(result);
+
+            }
+        }
+        List<BorrowVO> borrowVOList = borrowService.findBorrowByCustomer(customer.getId(),history);
+        result.put("rows",borrowVOList);
+        result.put("msg","");
+        return JSONObject.toJSONString(result);
+    }
+
+
+
     @RequestMapping("queryExpireBorrow")
     public ModelAndView  queryExpireBorrow(ModelAndView modelAndView){
 
@@ -238,6 +291,102 @@ public class BorrowAction {
         return "borrow/add";
     }
 
+
+
+
+    @ResponseBody
+    @RequestMapping(value = "ajaxAddBorrow",produces = { "application/json;charset=UTF-8" })
+    public String ajaxAddBorrow(Integer cardNumber,String isbn){
+        Map<Object, Object> result = Maps.newHashMap();
+
+
+        //判断书的状态 //0:正常 1：丢失 2：损坏 3:表示图书外借
+        Book bookByISBN = bookService.findBookByISBN(isbn);
+        if ("2".equals(bookByISBN.getStatus())){
+            result.put("msg","该书已经损坏，暂时不能外借!");
+            return JSONObject.toJSONString(result);
+        }
+
+
+
+        //判断该用户是否还可以借书
+
+
+        //判断用户是否存在
+        Customer customer = customerService.findCustomerByCardNumber(cardNumber);
+        if (customer==null){
+            result.put("msg","不存在该用户，请确认!");
+            return JSONObject.toJSONString(result);
+        }
+
+        //1 逾期
+        DateTime dateTime = new DateTime(customer.getExpireTime());
+        if (dateTime.isBeforeNow()||"2".equals(customer.getStatus())){
+            result.put("msg","该用户已经到期，暂时不能借书，请续费!");
+            return JSONObject.toJSONString(result);
+        }
+
+
+        /**
+         * 0:正常
+         * 1:挂失
+         * 2:逾期
+         */
+        //2 挂失
+        if ("1".equals(customer.getStatus())){
+            result.put("msg","该用户已经挂失，暂时不能借书！");
+
+            return JSONObject.toJSONString(result);
+        }
+
+        //3 数量达到上限
+        Boolean aBoolean = borrowService.checkIfOverCeiling(customer);
+        if (aBoolean){
+            result.put("msg","该用户已经达到借书上限，请归还后再借书！");
+            return JSONObject.toJSONString(result);
+        }
+
+
+        //4 押金小于50元是不许借书
+        if (customer.getDeposit()<50){
+            result.put("msg","该用户押金小于50元，暂时不能借书！");
+            return JSONObject.toJSONString(result);
+        }
+
+
+        //判断是否借过 通过ajax做
+
+        Borrow borrow = new Borrow();
+
+        borrow.setCustomerId(customer.getId());
+        borrow.setBookId(bookService.findBookByISBN(isbn).getId());
+
+
+        DateTime today = new DateTime();
+
+        borrow.setBorrowTime(today.toDate());
+        borrow.setExpireTime(today.plusDays(10).toDate());
+
+        //书的状态 默认是完好的，没有损坏的
+        borrow.setStatus(Boolean.TRUE);
+        borrow.setDays(10);
+
+        borrowService.addBorrow(borrow);
+
+
+
+        // 更新图书状态为3 表示图书外借
+        Book book = bookService.findBookByISBN(isbn);
+        book.setStatus("3");
+        bookService.updateBook(book);
+
+        result.put("msg","借书成功");
+        result.put("success","true");
+        return JSONObject.toJSONString(result);
+    }
+
+
+
     @RequestMapping("addBorrowBackToList")
     public String addBorrowBackToList(String cardNumber,String isbn){
 
@@ -259,6 +408,30 @@ public class BorrowAction {
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "ajaxBackBorrow",produces = { "application/json;charset=UTF-8" })
+    public String ajaxBackBorrow(Integer id){
+        Map<Object, Object> result = Maps.newHashMap();
+
+
+        Borrow borrow = borrowService.findBorrowById(id);
+        Customer customer = customerService.findCustomerById(borrow.getCustomerId());
+
+        //判断是否逾期  是否需要扣除押金
+        overDueCheck(customer,borrow);
+
+        //跟新图书状态 改为0 表示正常在馆
+        Book book = bookService.findBookById(borrow.getBookId());
+        book.setStatus("0");
+        bookService.updateBook(book);
+
+        borrow.setBackTime(new Date());
+        borrowService.updateBorrow(borrow);
+
+        result.put("msg","归还成功");
+        return JSONObject.toJSONString(result);
+    }
+
     @RequestMapping("backBorrow")
     public String backBorrow(Integer id){
         Borrow borrow = borrowService.findBorrowById(id);
@@ -279,6 +452,26 @@ public class BorrowAction {
         return "redirect:/borrowAction/queryBorrow.action?cardNumber="+customer.getNumber();
 
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "ajaxRenewBorrow",produces = { "application/json;charset=UTF-8" })
+    public String ajaxRenewBorrow(Integer id){
+        Map<Object, Object> result = Maps.newHashMap();
+
+        Borrow borrow = borrowService.findBorrowById(id);
+
+        Date expireTime = borrow.getExpireTime();
+
+        DateTime renewDate = new DateTime(expireTime).plusDays(ConfHelper.getIntConfig("renew.borrow"));
+
+        borrow.setExpireTime(renewDate.toDate());
+        borrowService.updateBorrow(borrow);
+        result.put("msg","续借成功");
+        return JSONObject.toJSONString(result);
+    }
+
+
     @RequestMapping("renewBorrow")
     public String renewBorrow(Integer id){
         Borrow borrow = borrowService.findBorrowById(id);
@@ -386,6 +579,68 @@ public class BorrowAction {
 
     /**
      *
+     * @param borrowVO
+     * @param op 0:丢失 1:损坏
+     * @param money
+     * @param reason
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "ajaxDeduction",produces = { "application/json;charset=UTF-8" })
+    public String ajaxDeduction(BorrowVO borrowVO,Integer op,Double money,String reason){
+        Map<Object, Object> result = Maps.newHashMap();
+
+
+        Customer customer = customerService.findCustomerByCardNumber(borrowVO.getCardNumber());
+        Book book = bookService.findBookByISBN(borrowVO.getIsbn());
+
+
+        //保存扣费记录
+        Deduction deduction = new Deduction();
+        deduction.setCustomerId(customer.getId());
+        deduction.setBookId(book.getId());
+
+        deduction.setBorrowId(borrowVO.getId());
+        deduction.setCreateTime(new Date());
+        deduction.setMoney(money);
+        deduction.setReason(reason);
+        deductionService.addDeduction(deduction);
+
+        //扣除用户的押金
+        Double m = customer.getDeposit()-money;
+        customer.setDeposit(m);
+        customerService.updateCustomer(customer);
+
+
+        //把书还了
+        Borrow borrow = borrowService.findBorrowById(borrowVO.getId());
+        borrow.setBackTime(new Date());
+
+        /**
+         * 归还时
+         * true 书完好
+         * false 书损坏或丢失
+         */
+        borrow.setStatus(false);
+        borrowService.updateBorrow(borrow);
+
+        //0:丢失 1:损坏
+        //跟新书的状态 //0:正常 1：丢失 2：损坏
+        int status = ((int)op) + 1;
+        book.setStatus(String.valueOf(status));
+        bookService.updateBook(book);
+
+        //如果逾期 扣除逾期的费用
+        overDueCheck(customer,borrow);
+
+        result.put("msg","扣费成功");
+        return JSONObject.toJSONString(result);
+    }
+
+
+
+    /**
+     *
      * @param borrowId
      * @return 如果没有过期返回0 如果过期返回 天数*1元
      */
@@ -463,7 +718,7 @@ public class BorrowAction {
             return "不存在该书，请确认!";
         }
 
-        List<Borrow> borrows = borrowService.checkIfBorrowed(customer.getId(),book.getId());
+        List<BorrowVO> borrows = borrowService.checkIfBorrowed(customer.getId(),book.getId());
         if (borrows.size()<1){
             return "0";//表示没有借过这本书
         }else{
@@ -473,4 +728,34 @@ public class BorrowAction {
 
 
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "ajaxQueryBorrowed",produces = { "application/json;charset=UTF-8" })
+    public String ajaxQueryBorrowed(Integer cardNumber,String isbn){
+        Map<Object, Object> result = Maps.newHashMap();
+
+        Customer customer = customerService.findCustomerByCardNumber(cardNumber);
+        if (customer==null){
+            result.put("msg","不存在该用户，请确认!");
+        return JSONObject.toJSONString(result);
+    }
+
+    Book book = bookService.findBookByISBN(isbn);
+        if (book == null){
+        result.put("msg","不存在该书，请确认!");
+        return JSONObject.toJSONString(result);
+    }
+
+        List<BorrowVO> borrows = borrowService.checkIfBorrowed(customer.getId(),book.getId());
+        if (borrows.size()<1){
+            result.put("borrowed",false);//表示没有借过这本书
+        }else{
+            result.put("rows",borrows);
+            result.put("borrowed",true);//表示借过这本书
+        }
+
+        return JSONObject.toJSONString(result);
+    }
+
 }

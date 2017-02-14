@@ -29,4 +29,5 @@ public interface BookMapper {
     int updateByPrimaryKey(Book record);
 
     List<Book> findBookByInput(String input);
+    List<Book> findAllBooksVo();
 }
