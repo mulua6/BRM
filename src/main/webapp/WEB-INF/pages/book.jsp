@@ -380,28 +380,25 @@
     
     function bookAdd() {
 
-
         var submit = $('#bookAddForm').form("validate");
 
         if (submit){
 
+            var shelfId = $("#add_book_shelfId").combobox("getValue");
+            var packaging = $("#add_book_packaging").combobox("getValue");
+
             $('#bookAddForm').form('submit', {
                 success: function(data){
 
-
                     //添加后不关闭窗口
-//                    $("#bookAdd").dialog("close");
-                    var data = eval('(' + data + ')');
                     $.messager.alert("提示","添加图书成功","info")
                     $("#bookList").datagrid("reload");
 
 
                     //剩下 书架和包装不用清除
-//                    $('#bookAddForm').form("clear");
-                    $("#bookAddForm input[class!='textbox-text validatebox-text']").each(function () {
-                        $(this).val("");
-                    });
-
+                    $('#bookAddForm').form("clear");
+                    $("#add_book_shelfId").combobox("select",shelfId);
+                    $("#add_book_packaging").combobox("select",packaging);
 
                 },
                 error: function () {
