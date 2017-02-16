@@ -26,6 +26,8 @@
 				<th data-options="field:'days',align:'center'" width="80">持书天数</th>
 				<th data-options="field:'number',align:'center'" width="80">可借数量</th>
 				<th data-options="field:'deposit',align:'center'" width="100">押金金额</th>
+				<th data-options="field:'months',align:'center'" width="100">有效期(月)</th>
+				<th data-options="field:'other',align:'center'" width="100">描述</th>
 				<%--<th data-options="field:'lost',align:'center'" width="100">丢失罚金</th>--%>
 				<%--<th data-options="field:'broken',align:'center'" width="100">损坏罚金</th>--%>
 			</tr>
@@ -80,6 +82,14 @@
 				<label for="deposit">押金金额:</label>
 				<input type="text" name="deposit" data-options="required:true" /><br/><br/>
 			</div>
+			<div>
+				<label for="months">有效期(月):</label>
+				<input type="text" name="months" data-options="required:true" /><br/><br/>
+			</div>
+			<div>
+				<label for="other">描述:</label>
+				<input type="text" name="other" data-options="required:true" /><br/><br/>
+			</div>
 			<%--<div>--%>
 				<%--<label for="lost">丢失罚金:</label>--%>
 				<%--<input type="text" name="lost" data-options="required:true" /><br/><br/>--%>
@@ -121,6 +131,14 @@
 				<label for="deposit">押金金额:</label>
 				<input type="text" name="deposit" class="easyui-validatebox" data-options="required:true" /><br/><br/>
 			</div>
+			<div>
+				<label for="months">有效期(月):</label>
+				<input type="text" name="months" data-options="required:true" /><br/><br/>
+			</div>
+			<div>
+				<label for="other">描述:</label>
+				<input type="text" name="other" data-options="required:true" /><br/><br/>
+			</div>
 			<%--<div>--%>
 				<%--<label for="lost">丢失罚金:</label>--%>
 				<%--<input type="text" name="lost" class="easyui-validatebox" data-options="required:true" /><br/><br/>--%>
@@ -139,7 +157,7 @@
 	$(function () {
 
 
-        $("input").each(function () {
+        $("div[id*='card'] input[name!='other']").each(function () {
 
             $(this).validatebox({
 

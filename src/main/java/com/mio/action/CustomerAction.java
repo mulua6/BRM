@@ -193,12 +193,16 @@ public class CustomerAction {
         DateTime today = new DateTime();
         customer.setCreateTime(today.toDate());
 
-        //设置到期时间 默认一年后到期
-        customer.setExpireTime(today.plusYears(1).toDate());
 
         //根据套餐类型设置押金
         Card card = cardService.findCardById(customer.getCardId());
         customer.setDeposit(card.getDeposit());
+
+
+        //获取但钱套餐的有效期
+        int months = card.getMonths().intValue();
+        //设置到期时间 默认一年后到期
+        customer.setExpireTime(today.plusMonths(months).toDate());
 
         //设置默认状态为正常
         customer.setStatus("0");

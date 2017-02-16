@@ -3,13 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 
-
-	<script type="text/javascript" >
-
-	</script>
-
-
-
 </head>
 <body id="customer">
 
@@ -75,6 +68,40 @@
 
 
 <script type="application/javascript">
+
+
+    function preAlterCard() {
+
+        var customer = getSelected("customerList");
+
+        if(customer!=undefined){
+
+            //ajax get card list
+            $.post("/cardAction/findAllCardsAsJson.action",{},function (data) {
+                $.each(data.rows,function (index,card) {
+
+                    var cardNode;
+
+                    if (customer.cardId == card.id){
+
+                        cardNode = $("<option value=\""+card.id+"\"  selected>"+card.cardName+"</option>")
+                    }else {
+                        cardNode = $("<option value=\""+card.id+"\" >"+card.cardName+"</option>")
+                    }
+
+                    $("#alterCardForm select").append(cardNode);
+                })
+
+            })
+
+            $("#alterCard").dialog("open");
+            $("#alterCardForm").form("load",customer);
+        }
+
+
+    }
+
+
 
     function formatDate(value,row){
         exTime = value;
@@ -532,38 +559,6 @@
         }
 
     }
-
-    function preAlterCard() {
-
-        var customer = getSelected("customerList");
-
-        if(customer!=undefined){
-
-            //ajax get card list
-            $.post("/cardAction/findAllCardsAsJson.action",{},function (data) {
-                $.each(data.rows,function (index,card) {
-
-                    var cardNode;
-
-                    if (customer.cardId == card.id){
-
-                        cardNode = $("<option value=\""+card.id+"\"  selected>"+card.cardName+"</option>")
-                    }else {
-                        cardNode = $("<option value=\""+card.id+"\" >"+card.cardName+"</option>")
-                    }
-
-                    $("#alterCardForm select").append(cardNode);
-                })
-
-            })
-
-            $("#alterCard").dialog("open");
-            $("#alterCardForm").form("load",customer);
-        }
-
-
-    }
-
 
 
     function alterCard() {

@@ -17,6 +17,10 @@ public class Card {
 
     private Double broken;
 
+    private String other;
+
+    private Integer months;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +83,21 @@ public class Card {
 
     public void setBroken(Double broken) {
         this.broken = broken;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other == null ? null : other.trim();
+    }
+
+    public Integer getMonths() {
+        return months;
+    }
+
+    public void setMonths(Integer months) {
+        this.months = months;
     }
 }

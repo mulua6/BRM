@@ -593,6 +593,136 @@ public class CardExample {
             addCriterion("broken not between", value1, value2, "broken");
             return (Criteria) this;
         }
+
+        public Criteria andOtherIsNull() {
+            addCriterion("other is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherIsNotNull() {
+            addCriterion("other is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherEqualTo(String value) {
+            addCriterion("other =", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherNotEqualTo(String value) {
+            addCriterion("other <>", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherGreaterThan(String value) {
+            addCriterion("other >", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherGreaterThanOrEqualTo(String value) {
+            addCriterion("other >=", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherLessThan(String value) {
+            addCriterion("other <", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherLessThanOrEqualTo(String value) {
+            addCriterion("other <=", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherLike(String value) {
+            addCriterion("other like", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherNotLike(String value) {
+            addCriterion("other not like", value, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherIn(List<String> values) {
+            addCriterion("other in", values, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherNotIn(List<String> values) {
+            addCriterion("other not in", values, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherBetween(String value1, String value2) {
+            addCriterion("other between", value1, value2, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andOtherNotBetween(String value1, String value2) {
+            addCriterion("other not between", value1, value2, "other");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsIsNull() {
+            addCriterion("months is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsIsNotNull() {
+            addCriterion("months is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsEqualTo(Integer value) {
+            addCriterion("months =", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsNotEqualTo(Integer value) {
+            addCriterion("months <>", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsGreaterThan(Integer value) {
+            addCriterion("months >", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("months >=", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsLessThan(Integer value) {
+            addCriterion("months <", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsLessThanOrEqualTo(Integer value) {
+            addCriterion("months <=", value, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsIn(List<Integer> values) {
+            addCriterion("months in", values, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsNotIn(List<Integer> values) {
+            addCriterion("months not in", values, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsBetween(Integer value1, Integer value2) {
+            addCriterion("months between", value1, value2, "months");
+            return (Criteria) this;
+        }
+
+        public Criteria andMonthsNotBetween(Integer value1, Integer value2) {
+            addCriterion("months not between", value1, value2, "months");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
